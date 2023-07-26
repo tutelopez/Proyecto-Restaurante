@@ -1,0 +1,18 @@
+footer{
+    margin-top: 10px;
+}
+/* Estilos personalizados para los iconos */
+.btn-floating.btn-lg {
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Cambiar el color de fondo del icono al hacer hover */
+  .btn-floating.btn-lg:hover {
+    background-color: #ea4225;
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .btn-floating.btn-lg:hover svg {
+    color: #fff;
+  }

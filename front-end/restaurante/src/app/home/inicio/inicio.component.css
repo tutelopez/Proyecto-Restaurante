@@ -1,0 +1,47 @@
+
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('../../../assets/imagenes/banner-hero.jpg');
+    background-size: cover;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 5% 5%;
+    color: #fff;
+  }
+  h1{
+    font-size: 45px;
+    font-weight: bold;
+    color: #ea4225;
+    text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
+    letter-spacing: 1px; 
+  }
+  p{
+    font-size: 30px;
+   
+  }
+/* Estilos personalizados para el botón */
+.btn-personalizado {
+    background-color: #ea4225;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Anular estilos de Bootstrap para el botón */
+  .btn.btn-primary {
+    background-color: #fff;
+    color: #ea4225;
+    border-color: #ea4225;
+  }
+  
+  /* Cambiar el color del botón de Bootstrap al hacer hover */
+  .btn.btn-primary:hover {
+    background-color: #ea4225;
+    color: #fff;
+  }
