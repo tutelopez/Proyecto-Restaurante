@@ -1,18 +1,34 @@
-<header class="p-3 bg-dark text-white">
+<div class="container">
+  <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <div class="d-flex align-items-center justify-content-between">
-        <!-- Logo alineado a la izquierda -->
-        <a href="/" class="d-flex align-items-center text-white text-decoration-none">
-          <img class="logo-navbar" src="../../../assets/imagenes/logo.jpg" alt="logo-restaurante" width="30" height="30">
-        </a>
-  
-        <!-- Menú centrado al medio -->
-        <ul class="nav d-flex justify-content-center mb-0">
-          <li class="nav-item"><a class="nav-link text-white" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Menú</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Contacto</a></li>
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="../../../assets/imagenes/logo.jpg" alt="" style="width: 60px; border-radius: 10px;">
+      </a>
+      <div class="social-media order-lg-last">
+        <p class="mb-0 d-flex">
+          <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+          <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+          <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+        </p>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span> Menu
+      </button>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto mr-md-3">
+          <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" [routerLink]="['/']">Inicio</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" [routerLink]="['/menu']">Menu</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" [routerLink]="['/contacto']">Contacto</a>
+          </li>
         </ul>
       </div>
     </div>
-  </header>
-  
+  </nav>
+  <!-- END nav -->
+</div>
+<router-outlet></router-outlet>
