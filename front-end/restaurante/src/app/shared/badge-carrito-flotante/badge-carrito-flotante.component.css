@@ -1,0 +1,15 @@
+/* cart-badge.component.css */
+:host {
+    position: fixed;
+    bottom: 20px; /* Puedes ajustar la posición vertical según tu preferencia */
+    right: 20px; /* Puedes ajustar la posición horizontal según tu preferencia */
+    z-index: 9999; /* Asegura que el badge esté por encima de otros elementos */
+    background-color: #000; /* Fondo negro */
+    border: 4px solid #ea4225; /* Contorno #ea4225 */
+    border-radius: 50%; /* Borde redondeado para hacer un círculo */
+    padding: 10px; /* Espacio interno para dar margen al contenido */
+    color: #fff;
+  }
+  
+
+  

@@ -11,14 +11,14 @@
     border-radius: 0 0 5% 5%;
     color: #fff;
   }
-  h1{
+ header h1{
     font-size: 45px;
     font-weight: bold;
     color: #ea4225;
     text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;
     letter-spacing: 1px; 
   }
-  p{
+  header p{
     font-size: 30px;
    
   }
@@ -29,7 +29,7 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    border: none;
+    border-color: #ea4225;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
@@ -45,3 +45,7 @@
     background-color: #ea4225;
     color: #fff;
   }
+/* Estilos personalizados */
+.custom-text-color {
+  color: #008000; /* Cambia el color a tu preferencia (en este caso, verde) */
+}

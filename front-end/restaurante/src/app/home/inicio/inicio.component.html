@@ -14,4 +14,65 @@
       </div>
     </div>
   </header>
-  
+  <br>
+<!-- CATEGORIAS -->
+  <app-categorias></app-categorias>
+
+<!-- LLAMADA A LA ACCION -->
+
+  <div class="container px-4 py-5">
+    <h2 class="pb-2 border-bottom text-center">¡Haz tu pedido! <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart-check-fill" viewBox="0 0 16 16">
+      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+    </svg></h2>
+
+    <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+      <div class="col d-flex flex-column align-items-start gap-2">
+        <h2 class="fw-bold text-body-emphasis">¡Bienvenido a Don Remolo, el paraíso de las pizzas y empanadas! </h2>
+        <p class="text-body-secondary">
+        Deléitate con sabores auténticos, ingredientes frescos y recetas tradicionales. Haz tu pedido ahora y disfruta de una experiencia gastronómica inolvidable. ¡Te esperamos con los brazos abiertos! ¡No te lo pierdas!</p>
+        <a routerLink="/menu"><button class="btn btn-primary btn-personalizado" type="button">Ver Menú</button></a>
+      </div>
+
+      <div class="col">
+        <div class="row row-cols-1 row-cols-sm-2 g-4">
+          <div class="col d-flex flex-column gap-2">
+            <div class="text-center icono-feature"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ea4225" class="bi bi-stopwatch-fill" viewBox="0 0 16 16">
+              <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07A7.001 7.001 0 0 0 8 16a7 7 0 0 0 5.29-11.584.531.531 0 0 0 .013-.012l.354-.354.353.354a.5.5 0 1 0 .707-.707l-1.414-1.415a.5.5 0 1 0-.707.707l.354.354-.354.354a.717.717 0 0 0-.012.012A6.973 6.973 0 0 0 9 2.071V1h.5a.5.5 0 0 0 0-1h-3zm2 5.6V9a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1 0-1h3V5.6a.5.5 0 1 1 1 0z"/>
+            </svg>
+            </div>
+            <h4 class="fw-semibold mb-0 text-body-emphasis text-center">Entrega Rápida</h4>
+            <p class="text-body-secondary">Nuestro servicio de entrega a domicilio es rápido y confiable, para que puedas disfrutar de nuestras delicias en la comodidad de tu hogar.</p>
+          </div>
+
+          <div class="col d-flex flex-column gap-2">
+            <div class="text-center icono-feature">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ea4225" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
+                <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707L7.293 1.5Z"/>
+                <path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9.293Zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018Z"/>
+              </svg>
+            </div>
+            <h4 class="fw-semibold mb-0 text-body-emphasis text-center">Retiro en nuestro restaurante</h4>
+            <p class="text-body-secondary">Disfruta de la comodidad y rapidez de nuestro servicio de retiro en restaurante. Realiza tu pedido en línea y recógelo directamente en nuestro establecimiento.</p>
+          </div>
+
+          <div class="col d-flex flex-column gap-2">
+            <div class="text-center icono-feature"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ea4225" class="bi bi-star-fill" viewBox="0 0 16 16">
+              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+            </svg>
+            </div>
+            <h4 class="fw-semibold mb-0 text-body-emphasis text-center">Variedad de Sabores</h4>
+            <p class="text-body-secondary">Disfruta de una amplia selección de pizzas y empanadas, cada una con sabores únicos que te harán regresar por más.</p>
+          </div>
+
+          <div class="col d-flex flex-column gap-2">
+            <div class="text-center icono-feature"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ea4225" class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.559 5.448a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zm-.07-5.448c1.397-.864 3.543 1.838-.953 3.434-3.067-3.554.19-4.858.952-3.434z"/>
+            </svg>
+            </div>
+            <h4 class="fw-semibold mb-0 text-body-emphasis text-center">Ingredientes Frescos</h4>
+            <p class="text-body-secondary">Utilizamos ingredientes frescos y de alta calidad en todas nuestras preparaciones, garantizando un sabor auténtico y delicioso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

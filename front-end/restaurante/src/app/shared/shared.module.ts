@@ -4,17 +4,21 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { BadgeCarritoFlotanteComponent } from './badge-carrito-flotante/badge-carrito-flotante.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    BadgeCarritoFlotanteComponent
   ],
   imports: [
     CommonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatBadgeModule
   ],
-  exports: [NavbarComponent, FooterComponent],
+  exports: [NavbarComponent, FooterComponent, BadgeCarritoFlotanteComponent],
 })
 export class SharedModule { }
