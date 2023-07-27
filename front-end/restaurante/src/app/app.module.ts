@@ -7,6 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HomeModule} from './home/home.module';
 import { MenuModule } from './menu/menu.module';
 import { ContactoModule } from './contacto/contacto.module';
+import { DashboardAdminModule } from './dashboard-admin/dashboard-admin.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +23,10 @@ import { ContactoModule } from './contacto/contacto.module';
     SharedModule,
     HomeModule,
     MenuModule,
-    ContactoModule
+    ContactoModule,
+    DashboardAdminModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
