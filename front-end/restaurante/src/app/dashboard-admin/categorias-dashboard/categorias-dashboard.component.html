@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="mb-4">Agregar Categoría</h2>
+  
+        <!-- Botón "Agregar Categoría" -->
+        <button class="btn btn-primary mb-3" (click)="mostrarFormulario = !mostrarFormulario">Agregar Categoría</button>
+  
+        <!-- Formulario para agregar categoría -->
+        <form *ngIf="mostrarFormulario">
+          <!-- Campo Nombre -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la Categoría</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+          
+          <!-- Botón de Envío -->
+          <button type="submit" class="btn btn-primary">Guardar Categoría</button>
+        </form>
+      </div>
+    </div>
+  </div>

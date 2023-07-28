@@ -5,6 +5,7 @@ import { MenuPageComponent } from './menu/menu-page/menu-page.component';
 import { ContactoPageComponent } from './contacto/contacto-page/contacto-page.component';
 import {CategoriasComponent} from './menu/categorias/categorias.component';
 import { DashboardPageComponent } from './dashboard-admin/dashboard-page/dashboard-page.component';
+import {CategoriasDashboardComponent} from './dashboard-admin/categorias-dashboard/categorias-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoPageComponent },
   {path:'categorias', component: CategoriasComponent},
   { path:'dashboard', component: DashboardPageComponent},
+  { path:'dashboard/categorias', component: CategoriasDashboardComponent},
   { path: '**', redirectTo: '/inicio' },
   
 ];
