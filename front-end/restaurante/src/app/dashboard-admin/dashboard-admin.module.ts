@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { ProductosDashboardComponent } from './productos-dashboard/productos-dashboard.component';
 import { CategoriasDashboardComponent } from './categorias-dashboard/categorias-dashboard.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { CategoriasDashboardComponent } from './categorias-dashboard/categorias-
     CategoriasDashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
   ],
   exports: [
     DashboardPageComponent,
