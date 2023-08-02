@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/menu/productos.service';
+import {CategoriasService} from 'src/app/menu/categorias.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,7 +9,8 @@ import { ProductosService } from 'src/app/menu/productos.service';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor(private productosService: ProductosService) { }
+  constructor(private productosService: ProductosService,
+    private categoriasService: CategoriasService) { }
 
   mostrarCategorias: boolean = false;
   mostrarProductos: boolean = false;
@@ -24,15 +26,23 @@ export class DashboardPageComponent implements OnInit {
   }
 
   cantidadProductos: number = 0;
+  cantidadCategorias: number = 0;
   
   ngOnInit(): void {
     // Llamar a la función para obtener el contador de productos al inicializar el componente
     this.obtenerCantidadProductos();
+    this.obtenerCantidadCategorias();
   }
 
   obtenerCantidadProductos() {
     this.productosService.obtenerProductos().subscribe((productos) => {
       this.cantidadProductos = productos.length;
+    });
+  }
+
+  obtenerCantidadCategorias() {
+    this.categoriasService.obtenerCategorias().subscribe((categorias) => {
+      this.cantidadCategorias = categorias.length;
     });
   }
 }

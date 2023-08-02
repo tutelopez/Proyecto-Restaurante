@@ -2,6 +2,9 @@
 <div class="d-flex flex-wrap">
   <!-- Sidebar -->
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
+    <div class="text-center m-2">
+      <img src="../../../assets/imagenes/logo.jpg" alt="logo-restaurante" style="width: 90px; border-radius: 50%;">
+    </div>
     <a href="/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-4">Panel de administración</span>
@@ -32,9 +35,7 @@
       </li>
     </ul>
     <hr>
-    <div class="text-center">
-      <img src="../../../assets/imagenes/logo.jpg" alt="logo-restaurante" style="width: 90px; border-radius: 50%;">
-    </div>
+    
   </div>
 
    <!-- Contenido adicional al lado del sidebar -->
@@ -78,7 +79,7 @@
                 <div class="row align-items-center mb-2 d-flex">
                   <div class="col-8">
                     <h2 class="d-flex align-items-center mb-0">
-                      3
+                      {{ cantidadCategorias }}
                     </h2>
                   </div>
                 </div>

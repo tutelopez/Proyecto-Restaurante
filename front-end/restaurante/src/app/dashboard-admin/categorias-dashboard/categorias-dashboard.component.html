@@ -1,26 +1,66 @@
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2 class="mb-4">Agregar Categoría</h2>
-  
-        <!-- Botón "Agregar Categoría" -->
-        <button class="btn btn-primary mb-3" (click)="mostrarFormulario = !mostrarFormulario">Agregar Categoría</button>
-  
-        <!-- Formulario para agregar categoría -->
-        <form *ngIf="mostrarFormulario">
+  <h2 class="text-center">Lista de Categorias</h2>
+  <div class="table-container">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Foto</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoria of categorias | async; let i = index">
+          <td>{{ categoria.id }}</td>
+          <td class="nombre-tabla">{{ categoria.nombre }}</td>
+          <td><img class="imagen-tabla" [src]="[categoria.foto]" alt="Foto de la categoria: {{ categoria.nombre }}" height="100"></td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="eliminarCategoria(categoria)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 estilo-card text-center">
+      
+
+      <!-- Mostrar el botón "Agregar Producto" solo si el formulario no se ha enviado -->
+      <button *ngIf="!formularioEnviado" class="btn btn-light mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Agregar Categoria</button>
+
+      <!-- Verifica si formulario está inicializado, es válido y no se ha enviado antes de mostrarlo -->
+      <ng-container *ngIf="formulario && mostrarFormulario && !formularioEnviado">
+        <!-- Formulario para agregar producto -->
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
           <!-- Campo Nombre -->
           <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre de la Categoría</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+            <label for="nombre" class="form-label">Nombre de la Categoria:</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+            <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].touched"
+                 class="text-danger">Campo requerido</div>
           </div>
-           <!-- Campo Foto -->
-           <div class="mb-3">
-            <label for="foto" class="form-label">Foto de la Categoría:</label>
-            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" required>
+
+        
+          <!-- Campo Foto -->
+          <div class="mb-3">
+            <label for="foto" class="form-label">Foto de la Categoria:</label>
+            
+            <input type="file" accept=".png, .jpg, .jpeg" (change)="cargarImagen($event)" class="form-control" id="foto" formControlName="foto" required>
+
+            <div *ngIf="formulario.controls['foto'].invalid && formulario.controls['foto'].touched"
+                 class="text-danger">Campo requerido</div>
           </div>
-          <!-- Botón de Envío -->
-          <button type="submit" class="btn btn-primary">Guardar Categoría</button>
+          
+          <button type="submit" class="btn btn-light m-2">Guardar Categoria</button>
         </form>
-      </div>
+      </ng-container>
     </div>
   </div>
+</div>
