@@ -1,10 +1,38 @@
 <div class="container mt-5">
+  <h2 class="text-center">Lista de Productos</h2>
+  <div class="table-container">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Foto</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos | async; let i = index">
+          <td>{{ producto.id }}</td>
+          <td class="nombre-tabla">{{ producto.nombre }}</td>
+          <td>{{ producto.precio }}</td>
+          <td><img class="imagen-tabla" [src]="[producto.foto]" alt="Foto del producto: {{ producto.nombre }}" height="100"></td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="eliminarProducto(producto)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container mt-5">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h2 class="mb-4">Agregar Producto</h2>
+    <div class="col-md-6 offset-md-3 estilo-card text-center">
+      
 
       <!-- Mostrar el botón "Agregar Producto" solo si el formulario no se ha enviado -->
-      <button *ngIf="!formularioEnviado" class="btn btn-primary mb-3" (click)="mostrarFormulario = !mostrarFormulario">Agregar Producto</button>
+      <button *ngIf="!formularioEnviado" class="btn btn-light mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Agregar Producto</button>
 
       <!-- Verifica si formulario está inicializado, es válido y no se ha enviado antes de mostrarlo -->
       <ng-container *ngIf="formulario && mostrarFormulario && !formularioEnviado">
@@ -36,37 +64,9 @@
                  class="text-danger">Campo requerido</div>
           </div>
           
-          <button type="submit" class="btn btn-primary">Guardar producto</button>
+          <button type="submit" class="btn btn-light m-2">Guardar producto</button>
         </form>
       </ng-container>
     </div>
   </div>
 </div>
-
-
-<div class="container mt-5">
-  <h2>Lista de Productos</h2>
-  <table class="table table-sm">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Foto</th>
-        <th>Accion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productos | async; let i = index">
-        <td>{{ producto.id }}</td>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.precio }}</td>
-        <td><img [src]="[producto.foto]" alt="Foto del producto: {{ producto.nombre }} " height="100"></td>
-        <td>
-          <button type="button" class="btn btn-danger" (click)="eliminarProducto(producto)">Borrar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
