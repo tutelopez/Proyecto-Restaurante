@@ -1,85 +1,256 @@
-/* Estilos globales */
-body {
-    margin: 0;
-    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: .8125rem;
-    font-weight: 400;
-    line-height: 1.5385;
-    color: #333;
-    text-align: left;
-    background-color: #2196F3;
+body{
+
+	background-color: #eee;
+}
+.container{
+	width: 1000px;
 }
 
-.mt-50 {
-    margin-top: 50px;
+.card{
+
+	background-color: #fff;
+	border:none;
+	border-radius: 10px;
+	width: 290px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 15px;
+	transition: transform 0.3s ease;
+}
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(234, 66, 37, 0.4), 0 12px 40px 0 rgba(234, 66, 37, 0.25);
+	transform: scale(1.05); /* Opcional: aumentar ligeramente el tamaño de la card */
+  }
+.image-container{
+
+	position: relative;
 }
 
-.mb-50 {
-    margin-bottom: 50px;
+.thumbnail-image{
+	border-radius: 10px !important;
 }
 
-/* Estilos de las cards */
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
+
+
+.wishlist{
+
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.image-container {
+	width: 100%;
+	height: 200px; /* Ajusta esta altura según tus necesidades */
+	overflow: hidden;
+  }
+  
+  .image-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+  }
+  
+  /* Media query para aplicar el margen solo en pantallas más pequeñas */
+  @media (max-width: 767px) {
+	.mb-4 {
+	  margin-bottom: 15px;
+	}
+  }
+  
+  
+.fixed-image-height {
+	height: 200px; /* Ajusta esta altura según tus necesidades */
+  }
+.image-fit {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+  }
+
+.dress-name{
+	font-size: 16px;
+	font-weight: bold;
+	width: 75%;
+	text-align: center;
+}
+
+
+.new-price{
+	font-size: 18px;
+	font-weight: bold;
+	color:#ea4225;
+	text-align: center;
+	
+}
+
+
+
+.btn-personalizado {
+    background-color: #ea4225;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border-color: #ea4225;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn.btn-primary {
     background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid #ea4225;
-    border-radius: .1875rem;
-}
-
-.card-img-actions {
-    position: relative;
-}
-
-.card-body {
-    flex: 1 1 auto;
-    padding: 1.25rem;
-    text-align: center;
-}
-
-/* Estilos de las imágenes dentro de las cards */
-.card-img {
-    width: 100%;
-    max-height: 200px; /* Ajusta la altura máxima según tus preferencias */
-    object-fit: contain; /* Ajusta la imagen para que se vea completa */
-    border-radius: 20px;
-}
-
-/* Estilos del botón de "Añadir al pedido" */
-.bg-cart {
+    color: #ea4225;
+    border-color: #ea4225;
+  }
+  
+  /* Cambiar el color del botón de Bootstrap al hacer hover */
+  .btn.btn-primary:hover {
     background-color: #ea4225;
     color: #fff;
-    border-radius: 50px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+.creme{
+	background-color: #fff;
+	border: 2px solid grey;
+	
+
+}
+.creme:hover {
+	border: 3px solid grey;
 }
 
-.bg-cart:hover {
-    background-color: #fff;
-    color: #ea4225;
-    border: 1px solid #ea4225;
-    border-radius: 50px;
-}
+.creme:focus {
+	background-color: grey;
 
-a {
-    text-decoration: none !important;
 }
 
 
-.titulo-card {
-    color: #ea4225;
+.red{
+	background-color: #fff;
+	border: 2px solid red;
+	
 }
 
-/* Estilos para igualar la altura de las cards en la misma fila */
-.row {
-    display: flex;
-    flex-wrap: wrap;
+
+.red:hover {
+	border: 3px solid red;
+}
+.red:focus {
+	background-color: red;
 }
 
-.col-md-4 {
-    flex: 1 0 33.33%;
-    margin-bottom: 15px;
+
+
+.blue{
+	background-color: #fff;
+	border: 2px solid #40C4FF;
+}
+
+.blue:hover {
+	border: 3px solid #40C4FF;
+}
+.blue:focus {
+	background-color: #40C4FF;
+}
+.darkblue{
+	background-color: #fff;
+	border: 2px solid #01579B;
+}
+.darkblue:hover {
+	border: 3px solid #01579B;
+}
+.darkblue:focus {
+	background-color: #01579B;
+}
+.yellow{
+	background-color: #fff;
+	border: 2px solid #FFCA28;
+}
+.yellow:hover {
+	border-radius: 3px solid #FFCA28;
+}
+.yellow:focus {
+	background-color: #FFCA28;
+}
+
+
+.item-size{
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid grey;
+	color: grey;
+	font-size: 10px;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+
+.rating-star{
+	font-size: 10px !important;
+}
+.rating-number{
+	font-size: 10px;
+	color: grey;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.voutchers{
+	background-color: #fff;
+	border:none;
+	border-radius: 10px;
+	width: 190px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow: hidden;
+
+}
+.voutcher-divider{
+
+	display: flex;
+
+}
+.voutcher-left{
+	width: 60%
+}
+.voutcher-name{
+	color: grey;
+	font-size: 9px;
+	font-weight: 500;
+}
+.voutcher-code{
+	color: red;
+	font-size: 11px;
+	font-weight: bold;
+}
+.voutcher-right{
+	width: 40%;	 
+	background-color: purple;
+	color: #fff;
+}
+
+.discount-percent{
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+	top: 5px;
+}
+.off{
+	font-size: 14px;
+	position: relative;
+	bottom: 5px;
 }
