@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoPageComponent },
   {path:'categorias', component: CategoriasComponent},
   { path:'dashboard', component: DashboardPageComponent},
-  { path:'dashboard/categorias', component: CategoriasDashboardComponent},
   { path: '**', redirectTo: '/inicio' },
   
 ];
