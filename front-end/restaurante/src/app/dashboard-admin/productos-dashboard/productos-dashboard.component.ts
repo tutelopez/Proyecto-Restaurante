@@ -3,8 +3,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductosService } from 'src/app/menu/productos.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import Productos from '../../menu/productos-interface';
+import { CategoriasService } from 'src/app/menu/categorias.service';
+import Categorias from '../../menu/categorias-interface';
 
 @Component({
   selector: 'app-productos-dashboard',
@@ -12,22 +14,28 @@ import Productos from '../../menu/productos-interface';
   styleUrls: ['./productos-dashboard.component.css']
 })
 export class ProductosDashboardComponent implements OnInit {
+  
   formulario: FormGroup;
   productos: Observable<Productos[]>;
   urlImagenes: { [key: string]: string } = {}; // Objeto para almacenar las URLs de imagen por clave (identificador único)
   lastKey: string | null = null; // Variable para almacenar el último identificador único generado
   formularioEnviado: boolean = false;
-  constructor(private productosService: ProductosService) {
+  categorias: Observable<Categorias[]>;
+
+  constructor(private productosService: ProductosService, private categoriasService: CategoriasService) {
     this.formulario = new FormGroup({
       nombre: new FormControl('', Validators.required),
       precio: new FormControl('', [Validators.required, Validators.min(0)]),
+      categoria: new FormControl('', Validators.required),
       foto: new FormControl(null, Validators.required)
     });
-    this.productos = new Observable<Productos[]>(); // Inicializar productos como un Observable vacío
+    this.productos = new Observable<Productos[]>();
+    this.categorias = new Observable<Categorias[]>(); // Inicializar CATEGORIAS como un Observable vacío
   }
 
   ngOnInit(): void {
     this.obtenerProductos();
+    this.obtenerCategorias();
   }
 
   obtenerProductos() {
@@ -37,6 +45,18 @@ export class ProductosDashboardComponent implements OnInit {
       productos.forEach((producto) => {
         this.urlImagenes[producto.id!] = producto.foto || ''; // Asignar '' si foto es null
         this.lastKey = producto.id || null; // Actualizar el último identificador único generado
+      });
+      console.log('urlImagenes:', this.urlImagenes);
+    });
+  }
+
+  obtenerCategorias() {
+    this.categorias = this.categoriasService.obtenerCategorias();
+    this.categorias.subscribe((categorias) => {
+      
+      categorias.forEach((categoria) => {
+        this.urlImagenes[categoria.id!] = categoria.foto || ''; // Asignar '' si foto es null
+        this.lastKey = categoria.id || null; // Actualizar el último identificador único generado
       });
       console.log('urlImagenes:', this.urlImagenes);
     });
@@ -55,25 +75,31 @@ export class ProductosDashboardComponent implements OnInit {
       const nuevoProducto: Productos = {
         nombre: this.formulario.value.nombre,
         precio: this.formulario.value.precio,
-        foto: this.lastKey !== null ? this.urlImagenes[this.lastKey] : null // Asignar null si no hay foto cargada
+        foto: this.lastKey !== null ? this.urlImagenes[this.lastKey] : null,
+        categoria: this.formulario.value.categoria
       };
   
-      console.log('Nuevo producto a agregar:', nuevoProducto); // Agregar esta línea para imprimir los datos del nuevo producto
+      console.log('Nuevo producto a agregar:', nuevoProducto);
   
-      const response = await this.productosService.agregarProducto(nuevoProducto);
-      console.log('Respuesta del servicio:', response); // Agregar esta línea para imprimir la respuesta del servicio
+      try {
+        const response = await this.productosService.agregarProducto(nuevoProducto);
+        console.log('Respuesta del servicio:', response);
+        
+        // Resetear el formulario y marcarlo como no enviado
+        this.formulario.reset();
+        this.formularioEnviado = false;
   
-      // Resetear el formulario y marcarlo como no enviado
-      this.formulario.reset();
-      this.formularioEnviado = false;
+        // Cerrar el formulario
+        this.mostrarFormulario = false;
   
-      // Cerrar el formulario
-      this.mostrarFormulario = false;
-  
-      // Volver a cargar la lista de productos
-      this.obtenerProductos();
+        // Volver a cargar la lista de productos
+        this.obtenerProductos();
+      } catch (error) {
+        console.error('Error al agregar el producto:', error);
+      }
     }
   }
+  
   
 
   mostrarFormulario: boolean = false;
@@ -104,4 +130,8 @@ export class ProductosDashboardComponent implements OnInit {
       }
     };
   }
+
+
+  
+
 }

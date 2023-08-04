@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { BadgeCarritoFlotanteComponent } from './badge-carrito-flotante/badge-carrito-flotante.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     CommonModule,
     MatIconModule,
     RouterModule,
-    MatBadgeModule
+    MatBadgeModule,
+    
+    MatButtonModule, MatDialogModule
   ],
   exports: [NavbarComponent, FooterComponent, BadgeCarritoFlotanteComponent],
 })

@@ -11,7 +11,8 @@ import { DashboardAdminModule } from './dashboard-admin/dashboard-admin.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-
+import { CarritoModule } from './carrito/carrito.module';
+import { PedidosModule } from './pedidos/pedidos.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,6 +25,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     HomeModule,
     MenuModule,
     ContactoModule,
+    CarritoModule,
+    PedidosModule,
     DashboardAdminModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
