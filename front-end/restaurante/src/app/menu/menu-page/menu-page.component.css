@@ -2,24 +2,26 @@ body{
 
 	background-color: #eee;
 }
-.container{
-	width: 1000px;
-}
 
 .card{
 
 	background-color: #fff;
 	border:none;
 	border-radius: 10px;
-	width: 290px;
+	
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 15px;
+    margin-left: 50px;
+	width: 70%;
+	
 	transition: transform 0.3s ease;
 }
+
 .card:hover {
 	box-shadow: 0 8px 16px 0 rgba(234, 66, 37, 0.4), 0 12px 40px 0 rgba(234, 66, 37, 0.25);
 	transform: scale(1.05); /* Opcional: aumentar ligeramente el tamaño de la card */
   }
+
+  
 .image-container{
 
 	position: relative;
@@ -204,16 +206,6 @@ body{
 	color: grey;
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 .voutchers{

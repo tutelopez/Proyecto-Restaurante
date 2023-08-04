@@ -19,9 +19,9 @@
 
 
 <!-- Mostrar los productos filtrados -->
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let producto of filteredProductos">
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center align-items-center"><!-- Agrega las clases justify-content-center y align-items-center para centrar horizontal y verticalmente -->
+    <div class="col-md-4 mb-4 text-center" *ngFor="let producto of filteredProductos">
       <div class="card h-100">
         <div class="image-container">
           <img [src]="producto.foto" class="img-fluid rounded thumbnail-image">
