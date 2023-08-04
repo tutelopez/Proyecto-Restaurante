@@ -1,5 +1,5 @@
 .dialog-max-height {
-    max-height: 45vh; /* Puedes ajustar el valor según tus necesidades */
+    max-height: 38vh; /* Puedes ajustar el valor según tus necesidades */
   }
   .btn.btn-primary {
     background-color: #fff;
@@ -20,4 +20,11 @@
     color: #fff;
     border-color: #ea4225;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .total-pedido{
+    color: #ea4225;
+    font-size: 16px;
+  }
+  .form-label{
+    color: #ea4225;
   }

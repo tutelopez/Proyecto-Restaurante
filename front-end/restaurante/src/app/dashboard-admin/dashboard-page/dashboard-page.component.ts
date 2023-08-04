@@ -10,7 +10,8 @@ import {CategoriasService} from 'src/app/menu/categorias.service';
 export class DashboardPageComponent implements OnInit {
 
   constructor(private productosService: ProductosService,
-    private categoriasService: CategoriasService) { }
+    private categoriasService: CategoriasService,
+    ) { }
 
   mostrarCategorias: boolean = false;
   mostrarProductos: boolean = false;
@@ -32,7 +33,9 @@ export class DashboardPageComponent implements OnInit {
     // Llamar a la función para obtener el contador de productos al inicializar el componente
     this.obtenerCantidadProductos();
     this.obtenerCantidadCategorias();
+   
   }
+  
 
   obtenerCantidadProductos() {
     this.productosService.obtenerProductos().subscribe((productos) => {

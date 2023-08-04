@@ -5,11 +5,23 @@
 </div>
 
 <H1 class="text-center">NUESTRA CARTA</H1>
-<!-- PRODUCTOS -->
 
+<!-- Chip para filtrar productos -->
+<div class="d-flex justify-content-center">
+  <mat-chip-listbox aria-label="Selección de categorías">
+    <mat-chip-option color="warn" (click)="mostrarTodos()">Todos</mat-chip-option>
+    <mat-chip-option color="warn" *ngFor="let chip of chips" (click)="filtrarPorCategoria(chip)">
+      {{ chip }}
+    </mat-chip-option>
+  </mat-chip-listbox>
+</div>
+
+
+
+<!-- Mostrar los productos filtrados -->
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let producto of productos"> <!-- Agregamos la clase mb-4 para el margen inferior -->
+    <div class="col-md-4 mb-4" *ngFor="let producto of filteredProductos">
       <div class="card h-100">
         <div class="image-container">
           <img [src]="producto.foto" class="img-fluid rounded thumbnail-image">

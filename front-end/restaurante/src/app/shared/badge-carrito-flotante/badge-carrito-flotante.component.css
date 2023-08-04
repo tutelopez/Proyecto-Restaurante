@@ -9,7 +9,13 @@
     border-radius: 50%; /* Borde redondeado para hacer un círculo */
     padding: 10px; /* Espacio interno para dar margen al contenido */
     color: #fff;
+    transition: transform 0.2s ease;
   }
   
 
-  
+:host:hover {
+    transform: scale(1.2); /* Aplica un escalamiento del 120% al hacer hover */
+}
+:host:active {
+  transform: scale(0.8); /* Aplica un escalamiento del 80% al hacer clic */
+}

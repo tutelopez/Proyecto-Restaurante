@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarritoDialogComponent } from './carrito-dialog/carrito-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,8 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   imports: [
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class CarritoModule { }

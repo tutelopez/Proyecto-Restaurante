@@ -4,17 +4,18 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { ProductosDashboardComponent } from './productos-dashboard/productos-dashboard.component';
 import { CategoriasDashboardComponent } from './categorias-dashboard/categorias-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
-import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     ProductosDashboardComponent,
-    CategoriasDashboardComponent
+    CategoriasDashboardComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    
   ],
   exports: [
     DashboardPageComponent,
