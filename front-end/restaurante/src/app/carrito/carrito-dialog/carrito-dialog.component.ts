@@ -3,7 +3,7 @@ import { CarritoService } from '../carrito.service';
 import Productos from '../../menu/productos-interface';
 import { CarritoComunicacionService } from '../../menu/menu-page/carrito-comunicacion.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-carrito-dialog',
@@ -18,23 +18,33 @@ export class CarritoDialogComponent implements OnInit {
   numeroTelefono: string = '';
   direccion: string = '';
   notaEspecial: string = '';
-
+ 
 
   constructor(private carritoService: CarritoService, 
     private carritoComunicacionService: CarritoComunicacionService,
-    private sanitizer: DomSanitizer) {}
+    private sanitizer: DomSanitizer,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.productosCarrito = this.carritoService.obtenerCarrito();
     this.precioTotal = this.carritoService.calcularPrecioTotal();
   }
 
+  
   eliminarProducto(index: number) {
     this.carritoService.eliminarProducto(index);
     this.precioTotal = this.carritoService.calcularPrecioTotal();
     this.carritoComunicacionService.actualizarContador();
+    this.mostrarSnackbar();
   }
-  
+  mostrarSnackbar() {
+    this.snackBar.open('Has quitado un item de tu pedido', '', {
+      duration: 3000, // Duración en milisegundos que el Snackbar estará visible
+      horizontalPosition: 'center', // Posición horizontal (start, center, end)
+      verticalPosition: 'bottom', // Posición vertical (top, bottom)
+      panelClass: ['no-close-button']
+    });
+  }
 
   generarMensajePedido(): string {
     let mensaje = '¡Hola! Quiero realizar el siguiente pedido:\n\n';

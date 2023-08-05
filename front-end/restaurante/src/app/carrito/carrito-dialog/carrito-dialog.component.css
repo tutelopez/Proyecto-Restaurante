@@ -1,3 +1,7 @@
+.imagen-chef{
+  width: 200px;
+  height: 200px;
+}
 .dialog-max-height {
     max-height: 38vh; /* Puedes ajustar el valor según tus necesidades */
   }
@@ -28,3 +32,7 @@
   .form-label{
     color: #ea4225;
   }
+  .no-close-button .mat-snack-bar-action {
+    display: none;
+    }
+  

@@ -2,6 +2,9 @@ body{
 
 	background-color: #eee;
 }
+.no-close-button .mat-snack-bar-action {
+	display: none;
+  }
 
 .card{
 

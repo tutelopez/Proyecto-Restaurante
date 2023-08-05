@@ -4,7 +4,7 @@ import Productos from '../productos-interface';
 import { CarritoService } from '../../carrito/carrito.service';
 import { CarritoComunicacionService } from './carrito-comunicacion.service'
 import { CategoriasService } from '../categorias.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-menu-page',
   templateUrl: './menu-page.component.html',
@@ -21,7 +21,9 @@ export class MenuPageComponent implements OnInit {
   constructor(private productosService: ProductosService, 
     private carritoService: CarritoService,
     private carritoComunicacionService: CarritoComunicacionService,
-    private categoriasService: CategoriasService) { }
+    private categoriasService: CategoriasService,
+    private snackBar: MatSnackBar
+   ) { }
 
   ngOnInit(): void {
     this.productosService.obtenerProductos().subscribe((productos) => {
@@ -37,8 +39,19 @@ export class MenuPageComponent implements OnInit {
   agregarAlCarrito(producto: Productos) {
     this.carritoService.agregarProducto(producto);
     this.carritoComunicacionService.actualizarContador();
+    this.mostrarSnackbar();
+   
   }
 
+  mostrarSnackbar() {
+    this.snackBar.open('Agregado al pedido', '', {
+      duration: 3000, // Duración en milisegundos que el Snackbar estará visible
+      horizontalPosition: 'center', // Posición horizontal (start, center, end)
+      verticalPosition: 'bottom', // Posición vertical (top, bottom)
+      panelClass: ['no-close-button']
+    });
+  }
+  
   filtrarPorCategoria(categoria: string) {
     this.selectedCategory = categoria;
     if (categoria === 'Todos') {
