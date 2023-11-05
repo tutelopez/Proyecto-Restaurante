@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <!-- CATEGORIAS -->
 <app-categorias></app-categorias>
 <div class="text-center">
@@ -33,10 +34,17 @@
             <span class="new-price">$ {{ producto.precio }}</span>
           </div>
           <div class="mt-auto text-center">
-            <button class="btn btn-primary btn-personalizado" type="button" (click)="agregarAlCarrito(producto)">Agregar al pedido</button>
+            <button class="btn btn-primary btn-personalizado" type="button">Agregar al pedido</button>
+            <button class="btn" type="button" (click)="mostrarDetalleProducto(producto)">
+              <mat-icon>info</mat-icon>
+            </button>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-badge-carrito-flotante></app-badge-carrito-flotante>
+<app-footer></app-footer>

@@ -6,14 +6,15 @@ import { ContactoPageComponent } from './contacto/contacto-page/contacto-page.co
 import {CategoriasComponent} from './menu/categorias/categorias.component';
 import { DashboardPageComponent } from './dashboard-admin/dashboard-page/dashboard-page.component';
 import {CategoriasDashboardComponent} from './dashboard-admin/categorias-dashboard/categorias-dashboard.component';
-
+import {NavigationComponent} from './navigation/navigation.component';
 const routes: Routes = [
   { path: '', component: InicioComponent},
   { path: 'menu', component: MenuPageComponent },
   { path: 'contacto', component: ContactoPageComponent },
   {path:'categorias', component: CategoriasComponent},
   { path:'dashboard', component: DashboardPageComponent},
-  { path: '**', redirectTo: '/inicio' },
+  { path: 'dashboard-admin', component: NavigationComponent},
+  { path: '**', redirectTo: '' },
   
 ];
 

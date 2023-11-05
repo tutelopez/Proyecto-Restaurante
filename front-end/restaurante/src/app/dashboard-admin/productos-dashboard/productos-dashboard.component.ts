@@ -7,6 +7,8 @@ import { Observable, of } from 'rxjs';
 import Productos from '../../menu/productos-interface';
 import { CategoriasService } from 'src/app/menu/categorias.service';
 import Categorias from '../../menu/categorias-interface';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-productos-dashboard',
@@ -27,6 +29,7 @@ export class ProductosDashboardComponent implements OnInit {
       nombre: new FormControl('', Validators.required),
       precio: new FormControl('', [Validators.required, Validators.min(0)]),
       categoria: new FormControl('', Validators.required),
+      descripcion: new FormControl('', Validators.required),
       foto: new FormControl(null, Validators.required)
     });
     this.productos = new Observable<Productos[]>();
@@ -38,9 +41,14 @@ export class ProductosDashboardComponent implements OnInit {
     this.obtenerCategorias();
   }
 
+  productosTabla = new MatTableDataSource<Productos>();
+  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'categoria', 'foto', 'accion'];
+  
+
   obtenerProductos() {
     this.productos = this.productosService.obtenerProductos();
     this.productos.subscribe((productos) => {
+      this.productosTabla.data = productos;
       // Mapear las URLs de imagen al objeto urlImagenes usando el ID del producto como clave
       productos.forEach((producto) => {
         this.urlImagenes[producto.id!] = producto.foto || ''; // Asignar '' si foto es null
@@ -75,6 +83,7 @@ export class ProductosDashboardComponent implements OnInit {
       const nuevoProducto: Productos = {
         nombre: this.formulario.value.nombre,
         precio: this.formulario.value.precio,
+        descripcion: this.formulario.value.descripcion,
         foto: this.lastKey !== null ? this.urlImagenes[this.lastKey] : null,
         categoria: this.formulario.value.categoria
       };

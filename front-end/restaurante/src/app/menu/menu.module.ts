@@ -5,16 +5,24 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { MenuDeRestauranteComponent } from './menu-de-restaurante/menu-de-restaurante.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
+import { ProductoDetalleDialogComponent } from './menu-page/producto-detalle-dialog/producto-detalle-dialog.component';
 @NgModule({
   declarations: [
     MenuPageComponent,
     CategoriasComponent,
-    MenuDeRestauranteComponent
+    MenuDeRestauranteComponent,
+    ProductoDetalleDialogComponent
   ],
   imports: [
     CommonModule,
     MatChipsModule,
     MatSnackBarModule,
+    SharedModule,
+    RouterModule,
+    MatIconModule,
   ],
   exports:[
     MenuPageComponent,

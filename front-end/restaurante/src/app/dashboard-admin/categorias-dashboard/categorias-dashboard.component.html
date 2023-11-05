@@ -1,25 +1,38 @@
 <div class="container mt-5">
   <h2 class="text-center">Lista de Categorias</h2>
   <div class="table-container">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Foto</th>
-          <th>Accion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let categoria of categorias | async; let i = index">
-          <td>{{ categoria.id }}</td>
-          <td class="nombre-tabla">{{ categoria.nombre }}</td>
-          <td><img class="imagen-tabla" [src]="[categoria.foto]" alt="Foto de la categoria: {{ categoria.nombre }}" height="100"></td>
-          <td>
-            <button type="button" class="btn btn-danger" (click)="eliminarCategoria(categoria)">Borrar</button>
-          </td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="categoriasTabla" class="mat-elevation-z8">
+
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let categoria">{{ categoria.id }}</td>
+      </ng-container>
+
+      <!-- Columna Nombre -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let categoria">{{ categoria.nombre }}</td>
+      </ng-container>
+
+      <!-- Columna Foto -->
+      <ng-container matColumnDef="foto">
+        <th mat-header-cell *matHeaderCellDef>Foto</th>
+        <td mat-cell *matCellDef="let categoria">
+          <img [src]="categoria.foto" alt="Foto de la categoria: {{ categoria.nombre }}" height="100">
+        </td>
+      </ng-container>
+
+      <!-- Columna Acción -->
+      <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef>Acción</th>
+        <td mat-cell *matCellDef="let categoria">
+          <button mat-button (click)="eliminarCategoria(categoria)">Borrar</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
 </div>

@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 import { ProductosService } from 'src/app/menu/productos.service';
 import {CategoriasService} from 'src/app/menu/categorias.service';
 
 @Component({
-  selector: 'app-dashboard-page',
-  templateUrl: './dashboard-page.component.html',
-  styleUrls: ['./dashboard-page.component.css']
+  selector: 'app-dashboard-page-admin',
+  templateUrl: './dashboard-page-admin.component.html',
+  styleUrls: ['./dashboard-page-admin.component.css']
 })
-export class DashboardPageComponent implements OnInit {
-
+export class DashboardPageAdminComponent implements OnInit {
+  
   constructor(private productosService: ProductosService,
     private categoriasService: CategoriasService,
     

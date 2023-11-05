@@ -6,15 +6,11 @@
 .table-container {
     max-height: 250px; /* Cambia este valor a la altura deseada */
     overflow-y: auto; /* Agregar scrollbar vertical cuando la altura se excede */
-    border: 2px solid #ea4225;
-    border-radius: 10px;
-    
-  }
-.imagen-tabla{
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agregar sombra */
     border-radius: 10px;
 }
-.nombre-tabla{
-    color:#ea4225 ;
-    font-size: 18px;
+
+.imagen-tabla{
+    border-radius: 10px;
 }
 

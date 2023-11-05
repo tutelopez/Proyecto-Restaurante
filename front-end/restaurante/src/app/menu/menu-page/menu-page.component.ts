@@ -5,6 +5,9 @@ import { CarritoService } from '../../carrito/carrito.service';
 import { CarritoComunicacionService } from './carrito-comunicacion.service'
 import { CategoriasService } from '../categorias.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductoDetalleDialogComponent } from './producto-detalle-dialog/producto-detalle-dialog.component';
+
 @Component({
   selector: 'app-menu-page',
   templateUrl: './menu-page.component.html',
@@ -22,7 +25,8 @@ export class MenuPageComponent implements OnInit {
     private carritoService: CarritoService,
     private carritoComunicacionService: CarritoComunicacionService,
     private categoriasService: CategoriasService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
    ) { }
 
   ngOnInit(): void {
@@ -35,7 +39,16 @@ export class MenuPageComponent implements OnInit {
       this.chips = categorias.map((categoria) => categoria.nombre);
     });
   }
-
+  mostrarDetalleProducto(producto: Productos) {
+    this.dialog.open(ProductoDetalleDialogComponent, {
+      data: {
+        foto: producto.foto,
+        descripcion: producto.descripcion,
+        nombre: producto.nombre
+      }
+    });
+  }
+  
   agregarAlCarrito(producto: Productos) {
     this.carritoService.agregarProducto(producto);
     this.carritoComunicacionService.actualizarContador();

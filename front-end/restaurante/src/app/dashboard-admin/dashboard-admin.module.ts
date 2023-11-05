@@ -4,7 +4,8 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { ProductosDashboardComponent } from './productos-dashboard/productos-dashboard.component';
 import { CategoriasDashboardComponent } from './categorias-dashboard/categorias-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsMo
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    
+    MatTableModule,
+    MatPaginatorModule, 
   ],
   exports: [
     DashboardPageComponent,
