@@ -6,6 +6,7 @@ import { CategoriasDashboardComponent } from './categorias-dashboard/categorias-
 import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CommonModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule, 
+    MatPaginatorModule,
+    MatIconModule , 
   ],
   exports: [
     DashboardPageComponent,

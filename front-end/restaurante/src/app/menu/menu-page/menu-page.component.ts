@@ -44,7 +44,8 @@ export class MenuPageComponent implements OnInit {
       data: {
         foto: producto.foto,
         descripcion: producto.descripcion,
-        nombre: producto.nombre
+        nombre: producto.nombre,
+        precio: producto.precio
       }
     });
   }

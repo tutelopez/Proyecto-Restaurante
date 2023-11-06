@@ -4,6 +4,7 @@ import { CategoriasService } from 'src/app/menu/categorias.service';
 import { Observable } from 'rxjs';
 import Categorias from '../../menu/categorias-interface';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-categorias-dashboard',
@@ -16,7 +17,7 @@ export class CategoriasDashboardComponent implements OnInit {
   }
 
   categoriasTabla = new MatTableDataSource<Categorias>();
-  displayedColumns: string[] = ['id', 'nombre', 'foto', 'accion'];
+  displayedColumns: string[] = ['nombre', 'foto', 'accion'];
 
   mostrarFormulario: boolean = false;
   formulario: FormGroup;
@@ -25,14 +26,18 @@ export class CategoriasDashboardComponent implements OnInit {
   lastKey: string | null = null;
   formularioEnviado: boolean = false;
 
-  constructor(private categoriasService: CategoriasService) {
+  constructor(private categoriasService: CategoriasService, private snackBar: MatSnackBar) {
     this.formulario = new FormGroup({
       nombre: new FormControl('', Validators.required),
       foto: new FormControl(null, Validators.required),
     });
     this.categorias = new Observable<Categorias[]>();
   }
-
+  mostrarSnackbar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Cerrar', {
+      duration: 3000, // Duración en milisegundos (3 segundos en este ejemplo)
+    });
+  }
   obtenerCategorias() {
     this.categorias = this.categoriasService.obtenerCategorias();
     this.categorias.subscribe((categorias) => {
@@ -53,6 +58,7 @@ export class CategoriasDashboardComponent implements OnInit {
   async eliminarCategoria(categoria: Categorias) {
     const response = await this.categoriasService.eliminarCategoria(categoria);
     console.log(response);
+    this.mostrarSnackbar('Categoria eliminada correctamente');
     this.obtenerCategorias();
   }
 
@@ -66,6 +72,8 @@ export class CategoriasDashboardComponent implements OnInit {
         nuevaCategoria
       );
       console.log('Respuesta del servicio:', response);
+      this.mostrarSnackbar('Categoria creada correctamente');
+      this.imagenCargada = false;
       this.formulario.reset();
       this.formularioEnviado = false;
       this.mostrarFormulario = false;
@@ -77,24 +85,35 @@ export class CategoriasDashboardComponent implements OnInit {
   async cargarImagen(event: any) {
     let archivos = event.target.files;
     let reader = new FileReader();
-    let nombre = 'mateo';
+    let nombre = "producto-restaurante";
+  
     reader.readAsDataURL(archivos[0]);
+  
     reader.onloadend = async () => {
       console.log(reader.result);
       this.imagenes.push(reader.result);
+  
+      // Generar el identificador único manualmente usando el timestamp actual y el nombre del archivo de imagen
       const timestamp = Date.now();
       const key = `image_${nombre}_${timestamp}`;
-      const urlImagen = await this.categoriasService.subirImagen(
-        nombre + '_' + timestamp,
-        reader.result
-      );
-      if (urlImagen !== null) {
-        console.log(urlImagen);
-        this.urlImagenes[key] = urlImagen;
-        this.lastKey = key;
-      } else {
-        console.log('Error al obtener la URL de la imagen desde Firebase Storage.');
+  
+      // Utilizar un try-catch para manejar errores al subir la imagen
+      try {
+        const urlImagen = await this.categoriasService.subirImagen(nombre + "_" + timestamp, reader.result);
+  
+        if (urlImagen !== null) {
+          console.log(urlImagen);
+          this.urlImagenes[key] = urlImagen; // Almacenar la URL en el objeto urlImagenes usando el identificador único como clave
+          this.lastKey = key; // Actualizar el último identificador único generado
+          this.imagenCargada = true;
+        } else {
+          console.log('Error al obtener la URL de la imagen desde Firebase Storage.');
+        }
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+        // Puedes mostrar un mensaje de error o realizar otras acciones según tus necesidades aquí.
       }
     };
   }
+  imagenCargada: boolean = false;
 }

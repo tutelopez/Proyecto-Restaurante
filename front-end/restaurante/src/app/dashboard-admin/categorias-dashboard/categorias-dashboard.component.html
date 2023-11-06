@@ -2,13 +2,6 @@
   <h2 class="text-center">Lista de Categorias</h2>
   <div class="table-container">
     <table mat-table [dataSource]="categoriasTabla" class="mat-elevation-z8">
-
-      <!-- Columna ID -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let categoria">{{ categoria.id }}</td>
-      </ng-container>
-
       <!-- Columna Nombre -->
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
@@ -27,7 +20,7 @@
       <ng-container matColumnDef="accion">
         <th mat-header-cell *matHeaderCellDef>Acción</th>
         <td mat-cell *matCellDef="let categoria">
-          <button mat-button (click)="eliminarCategoria(categoria)">Borrar</button>
+          <mat-icon (click)="eliminarCategoria(categoria)">delete</mat-icon>
         </td>
       </ng-container>
 
@@ -37,27 +30,23 @@
   </div>
 </div>
 
-
-
-
-<div class="container mt-5">
+<div class="text-center">
+<button *ngIf="!formularioEnviado" class="btn btn-dark mb-3 m-2 " (click)="mostrarFormulario = !mostrarFormulario">Agregar Categoria</button>
+</div>
+<div class="container mt-5 m-3">
   <div class="row">
     <div class="col-md-6 offset-md-3 estilo-card text-center">
       
-
-      <!-- Mostrar el botón "Agregar Producto" solo si el formulario no se ha enviado -->
-      <button *ngIf="!formularioEnviado" class="btn btn-light mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Agregar Categoria</button>
-
       <!-- Verifica si formulario está inicializado, es válido y no se ha enviado antes de mostrarlo -->
       <ng-container *ngIf="formulario && mostrarFormulario && !formularioEnviado">
         <!-- Formulario para agregar producto -->
         <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
           <!-- Campo Nombre -->
-          <div class="mb-3">
+          <div class="mb-3 m-3">
             <label for="nombre" class="form-label">Nombre de la Categoria:</label>
             <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
             <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].touched"
-                 class="text-danger">Campo requerido</div>
+                 class="text-white">Campo requerido</div>
           </div>
 
         
@@ -68,10 +57,11 @@
             <input type="file" accept=".png, .jpg, .jpeg" (change)="cargarImagen($event)" class="form-control" id="foto" formControlName="foto" required>
 
             <div *ngIf="formulario.controls['foto'].invalid && formulario.controls['foto'].touched"
-                 class="text-danger">Campo requerido</div>
+                 class="text-white">Campo requerido</div>
           </div>
           
-          <button type="submit" class="btn btn-light m-2">Guardar Categoria</button>
+          <button type="submit" class="btn btn-light m-2" [disabled]="!imagenCargada">Guardar categoria</button>
+          <button *ngIf="!formularioEnviado && mostrarFormulario" class="btn btn-light mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Cancelar</button>
         </form>
       </ng-container>
     </div>

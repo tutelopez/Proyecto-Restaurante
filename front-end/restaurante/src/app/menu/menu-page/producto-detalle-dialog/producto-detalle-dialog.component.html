@@ -1,9 +1,14 @@
 
-<div class="card">
-    <img [src]="data.foto" class="card-img-top img-max-height" alt="Foto del producto">
-    <div class="card-body">
-      <h2 class="card-title">{{ data.nombre }}</h2>
-      <p class="card-text">{{ data.descripcion }}</p>
-    </div>
-   
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" [src]="data.foto" alt="Imagen del producto">
+  <div class="card-body">
+    <h5 class="card-title">{{ data.nombre }}</h5>
+    <p class="card-text">{{ data.descripcion }}</p>
+    <span class="new-price text-right">Precio: $ {{ data.precio }}</span>
+  </div>
+  <div class="card-footer">
+    <div class="text-end">
+    <button class="btn btn-primary btn-personalizado" type="button" (click)="cerrarDialog()">Cerrar</button>
+  </div>
+  </div>
 </div>

@@ -1,7 +1,10 @@
 .estilo-card{
-    background-color: #ea4225;
-    border-radius: 10px;
-    color: rgb(255, 254, 254);
+    background-color: #151525;
+    background-image: 
+        radial-gradient(at 47% 33%, hsl(8.83, 82%, 53%) 0, transparent 59%), 
+        radial-gradient(at 82% 65%, hsl(0.00, 0%, 0%) 0, transparent 55%);
+    color: white;
+    border-radius: 15px;
 }
 .table-container {
     max-height: 400px; /* Cambia este valor a la altura deseada */
@@ -10,4 +13,6 @@
     border-radius: 10px;
 }
 
-
+.mat-icon:hover {
+    color: red; /* Cambia el color a rojo al pasar el mouse por encima */
+  }

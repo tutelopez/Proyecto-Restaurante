@@ -1,16 +1,32 @@
-
 .masthead {
-    height: 100vh;
-    min-height: 500px;
-    background-image: url('../../../assets/imagenes/banner-hero.jpg');
-    background-size: cover;
-    
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 0 0 5% 5%;
-    color: #fff;
-  }
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('../../../assets/imagenes/banner-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: relative; /* Agrega esta propiedad */
+}
+
+.masthead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0; /* Cambia el valor de z-index para que esté detrás del contenido */
+}
+
+/* Asegúrate de que el contenido esté en un contenedor con una posición relativa */
+.container.h-100 {
+  position: relative;
+}
+
+  
  header h1{
     font-size: 45px;
     font-weight: bold;
@@ -48,4 +64,15 @@
 /* Estilos personalizados */
 .custom-text-color {
   color: #008000; /* Cambia el color a tu preferencia (en este caso, verde) */
+}
+/* Estilos para dispositivos móviles (pantallas pequeñas) */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 30px; /* Ajusta el tamaño de la fuente para dispositivos móviles */
+    line-height: 1.2; /* Aumenta el espacio entre líneas para mayor legibilidad */
+  }
+  
+  header p {
+    font-size: 18px; /* Ajusta el tamaño de la fuente para dispositivos móviles */
+  }
 }

@@ -1,21 +1,9 @@
-<section class="wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col text-center mb-5">
-        <p class="lead text-dark">Categorias de productos </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let categoria of categorias">
-        <div class="card text-dark card-has-bg click-col" [style.backgroundImage]="'url(' + categoria.foto + ')'" >
-          <img class="card-img d-none" [src]="categoria.foto" alt="Creative Manner Design Lorem Ipsum Sit Amet Consectetur dipisi?">
-          <div class="card-img-overlay d-flex flex-column">
-            <div class="card-body">
-              <h4 class="card-title mt-0 text-center"><a class="text-white" href="#">{{ categoria.nombre }}</a></h4>
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="d-flex flex-wrap justify-content-center">
+  <div class="card text-white m-3 col-md-4" *ngFor="let categoria of categorias" style="border-radius: 10px;">
+    <img class="card-img" [src]="categoria.foto" alt="Card image">
+    <div class="card-overlay d-flex align-items-center justify-content-center">
+      <h1 class="card-title">{{ categoria.nombre }}</h1>
     </div>
   </div>
 </section>
+

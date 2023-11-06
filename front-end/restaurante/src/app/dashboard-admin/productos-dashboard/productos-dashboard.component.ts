@@ -8,6 +8,7 @@ import Productos from '../../menu/productos-interface';
 import { CategoriasService } from 'src/app/menu/categorias.service';
 import Categorias from '../../menu/categorias-interface';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,12 +20,13 @@ export class ProductosDashboardComponent implements OnInit {
   
   formulario: FormGroup;
   productos: Observable<Productos[]>;
+  
   urlImagenes: { [key: string]: string } = {}; // Objeto para almacenar las URLs de imagen por clave (identificador único)
   lastKey: string | null = null; // Variable para almacenar el último identificador único generado
   formularioEnviado: boolean = false;
   categorias: Observable<Categorias[]>;
 
-  constructor(private productosService: ProductosService, private categoriasService: CategoriasService) {
+  constructor(private productosService: ProductosService, private categoriasService: CategoriasService, private snackBar: MatSnackBar) {
     this.formulario = new FormGroup({
       nombre: new FormControl('', Validators.required),
       precio: new FormControl('', [Validators.required, Validators.min(0)]),
@@ -35,14 +37,14 @@ export class ProductosDashboardComponent implements OnInit {
     this.productos = new Observable<Productos[]>();
     this.categorias = new Observable<Categorias[]>(); // Inicializar CATEGORIAS como un Observable vacío
   }
-
+  
   ngOnInit(): void {
     this.obtenerProductos();
     this.obtenerCategorias();
   }
 
   productosTabla = new MatTableDataSource<Productos>();
-  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'categoria', 'foto', 'accion'];
+  displayedColumns: string[] = ['nombre', 'descripcion', 'precio', 'categoria', 'foto', 'accion'];
   
 
   obtenerProductos() {
@@ -73,6 +75,7 @@ export class ProductosDashboardComponent implements OnInit {
   async eliminarProducto(producto: Productos) {
     const response = await this.productosService.eliminarProducto(producto);
     console.log(response);
+    this.mostrarSnackbar('Producto eliminado correctamente');
     this.obtenerProductos();
   }
 
@@ -93,7 +96,8 @@ export class ProductosDashboardComponent implements OnInit {
       try {
         const response = await this.productosService.agregarProducto(nuevoProducto);
         console.log('Respuesta del servicio:', response);
-        
+        this.mostrarSnackbar('Producto creado correctamente');
+        this.imagenCargada = false;
         // Resetear el formulario y marcarlo como no enviado
         this.formulario.reset();
         this.formularioEnviado = false;
@@ -109,17 +113,24 @@ export class ProductosDashboardComponent implements OnInit {
     }
   }
   
-  
+  mostrarSnackbar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Cerrar', {
+      duration: 3000, // Duración en milisegundos (3 segundos en este ejemplo)
+    });}
 
   mostrarFormulario: boolean = false;
   imagenes: any[] = [];
 
+
+  imagenCargada: boolean = false;
+
   async cargarImagen(event: any) {
     let archivos = event.target.files;
     let reader = new FileReader();
-    let nombre = "mateo";
+    let nombre = "producto-restaurante";
   
     reader.readAsDataURL(archivos[0]);
+  
     reader.onloadend = async () => {
       console.log(reader.result);
       this.imagenes.push(reader.result);
@@ -128,19 +139,23 @@ export class ProductosDashboardComponent implements OnInit {
       const timestamp = Date.now();
       const key = `image_${nombre}_${timestamp}`;
   
-      const urlImagen = await this.productosService.subirImagen(nombre + "_" + timestamp, reader.result);
+      // Utilizar un try-catch para manejar errores al subir la imagen
+      try {
+        const urlImagen = await this.productosService.subirImagen(nombre + "_" + timestamp, reader.result);
   
-      if (urlImagen !== null) {
-        console.log(urlImagen);
-        this.urlImagenes[key] = urlImagen; // Almacenar la URL en el objeto urlImagenes usando el identificador único como clave
-        this.lastKey = key; // Actualizar el último identificador único generado
-      } else {
-        console.log('Error al obtener la URL de la imagen desde Firebase Storage.');
+        if (urlImagen !== null) {
+          console.log(urlImagen);
+          this.urlImagenes[key] = urlImagen; // Almacenar la URL en el objeto urlImagenes usando el identificador único como clave
+          this.lastKey = key; // Actualizar el último identificador único generado
+          this.imagenCargada = true;
+        } else {
+          console.log('Error al obtener la URL de la imagen desde Firebase Storage.');
+        }
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+        // Puedes mostrar un mensaje de error o realizar otras acciones según tus necesidades aquí.
       }
     };
   }
-
-
   
-
 }

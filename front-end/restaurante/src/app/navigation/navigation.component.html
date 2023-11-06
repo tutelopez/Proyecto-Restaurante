@@ -8,13 +8,13 @@
       <mat-toolbar>Menu</mat-toolbar>
     </div>
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard-admin">
+      <a mat-list-item href="/dashboard-admin">
         <mat-icon>home</mat-icon> Inicio
       </a>
-      <a mat-list-item (click)="mostrarContenidoProductos">
+      <a mat-list-item (click)="mostrarContenidoProductos()">
         <mat-icon>shopping_cart</mat-icon> Productos
       </a>
-      <a mat-list-item (click)="mostrarContenidoCategorias">
+      <a mat-list-item (click)="mostrarContenidoCategorias()">
         <mat-icon>category</mat-icon> Categorías
       </a>
     </mat-nav-list>    

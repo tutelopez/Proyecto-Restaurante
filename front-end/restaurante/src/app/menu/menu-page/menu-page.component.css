@@ -95,8 +95,7 @@ body{
 	font-size: 18px;
 	font-weight: bold;
 	color:#ea4225;
-	text-align: center;
-	
+	text-align: right; width: 100%;
 }
 
 
@@ -121,69 +120,6 @@ body{
     background-color: #ea4225;
     color: #fff;
   }
-.creme{
-	background-color: #fff;
-	border: 2px solid grey;
-	
-
-}
-.creme:hover {
-	border: 3px solid grey;
-}
-
-.creme:focus {
-	background-color: grey;
-
-}
-
-
-.red{
-	background-color: #fff;
-	border: 2px solid red;
-	
-}
-
-
-.red:hover {
-	border: 3px solid red;
-}
-.red:focus {
-	background-color: red;
-}
-
-
-
-.blue{
-	background-color: #fff;
-	border: 2px solid #40C4FF;
-}
-
-.blue:hover {
-	border: 3px solid #40C4FF;
-}
-.blue:focus {
-	background-color: #40C4FF;
-}
-.darkblue{
-	background-color: #fff;
-	border: 2px solid #01579B;
-}
-.darkblue:hover {
-	border: 3px solid #01579B;
-}
-.darkblue:focus {
-	background-color: #01579B;
-}
-.yellow{
-	background-color: #fff;
-	border: 2px solid #FFCA28;
-}
-.yellow:hover {
-	border-radius: 3px solid #FFCA28;
-}
-.yellow:focus {
-	background-color: #FFCA28;
-}
 
 
 .item-size{

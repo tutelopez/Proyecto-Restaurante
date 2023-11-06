@@ -46,3 +46,12 @@ p {
 .navbar-nav .nav-item .nav-link:hover::after {
   width: 100%;
 }
+
+.navbar-toggler {
+  border: none; /* Quítale el borde */
+  outline: none; /* Quita el contorno predeterminado al hacer clic */
+}
+.navbar-toggler:focus {
+  outline: none; /* Quita el contorno cuando el botón está enfocado */
+  border: none;
+}
