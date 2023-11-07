@@ -6,7 +6,8 @@ import { ProductosService } from 'src/app/menu/productos.service';
 import {CategoriasService} from 'src/app/menu/categorias.service';
 import { UserServiceService } from '../auth/user.service.service';
 import { Router } from '@angular/router';
-
+import { MatDialog } from '@angular/material/dialog';
+import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -23,7 +24,8 @@ export class NavigationComponent implements OnInit {
     constructor(private productosService: ProductosService,
       private categoriasService: CategoriasService,
       private userService: UserServiceService,
-      private router: Router
+      private router: Router,
+      private dialog: MatDialog
       
       ) { }
   
@@ -70,4 +72,16 @@ export class NavigationComponent implements OnInit {
         })
         .catch(error => console.log(error));
     };
+
+    openLogoutConfirmationDialog(): void {
+      const dialogRef = this.dialog.open(LogoutConfirmationDialogComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // El usuario confirmó el cierre de sesión
+          this.cerrarSesion();
+        }
+      });
+    }
+    
 }

@@ -17,9 +17,10 @@
       <a mat-list-item (click)="mostrarContenidoCategorias()">
         <mat-icon>category</mat-icon> Categorías
       </a>
-      <a mat-list-item class="logout-item" (click)="cerrarSesion()">
-        <mat-icon class="logout-icon" >exit_to_app</mat-icon>Cerrar Sesión
+      <a mat-list-item class="logout-item" (click)="openLogoutConfirmationDialog()">
+        <mat-icon class="logout-icon">exit_to_app</mat-icon>Cerrar Sesión
       </a>
+      
     </mat-nav-list> 
     
     <!-- Botón de cierre de sesión -->

@@ -24,13 +24,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthModule } from './auth/auth.module';
+import { MatDialogModule } from '@angular/material/dialog';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { LogoutConfirmationDialogComponent } from './navigation/logout-confirmation-dialog/logout-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    DashboardPageAdminComponent
+    DashboardPageAdminComponent,
+    LogoutConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     ContactoModule,
     CarritoModule,
     PedidosModule,
+    MatDialogModule,
     DashboardAdminModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
