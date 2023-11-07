@@ -27,7 +27,14 @@
 }
 
 .custom-header {
-  background-color: #ff5722; /* Cambia el color de fondo a tu elección */
-  color: white; /* Cambia el color del texto a tu elección */
-  /* Otros estilos que desees aplicar */
+  background-color: #ff5722; 
+  color: white; 
 }
+.logout-item {
+  color: red; /* Cambia el color del texto a rojo */
+}
+
+.logout-icon {
+  color: red; /* Cambia el color del icono a rojo */
+}
+
