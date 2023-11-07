@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ProductosService } from 'src/app/menu/productos.service';
 import {CategoriasService} from 'src/app/menu/categorias.service';
+import { UserServiceService } from '../auth/user.service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -20,6 +22,8 @@ export class NavigationComponent implements OnInit {
     );
     constructor(private productosService: ProductosService,
       private categoriasService: CategoriasService,
+      private userService: UserServiceService,
+      private router: Router
       
       ) { }
   
@@ -59,4 +63,11 @@ export class NavigationComponent implements OnInit {
       });
     }
   
+    cerrarSesion(){
+      this.userService.logOut()
+        .then(() =>{
+          this.router.navigate(['/login']);
+        })
+        .catch(error => console.log(error));
+    };
 }

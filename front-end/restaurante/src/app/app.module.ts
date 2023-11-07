@@ -23,6 +23,9 @@ import { DashboardPageAdminComponent } from './dashboard-page-admin/dashboard-pa
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { AuthModule } from './auth/auth.module';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    AuthModule,
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]
