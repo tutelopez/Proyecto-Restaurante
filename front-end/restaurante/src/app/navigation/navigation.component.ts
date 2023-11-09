@@ -41,6 +41,10 @@ export class NavigationComponent implements OnInit {
       this.mostrarProductos = true;
       this.mostrarCategorias = false;
     }
+    mostrarNada() {
+      this.mostrarProductos =false;
+      this.mostrarCategorias = false;
+    }
   
     cantidadProductos: number = 0;
     cantidadCategorias: number = 0;

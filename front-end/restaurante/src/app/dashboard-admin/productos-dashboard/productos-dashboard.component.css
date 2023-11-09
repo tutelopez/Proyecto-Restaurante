@@ -1,3 +1,13 @@
+
+.accion-container {
+    display: flex;
+    gap: 8px; 
+  }
+  
+  .accion-icon {
+    cursor: pointer;
+  }
+  
 .estilo-card{
     background-color: #151525;
     background-image: 

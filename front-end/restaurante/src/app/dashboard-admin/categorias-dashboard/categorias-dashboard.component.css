@@ -19,3 +19,14 @@
 .mat-icon:hover {
     color: red; /* Cambia el color a rojo al pasar el mouse por encima */
   }
+
+  /* Agrega estos estilos en tu archivo de estilos CSS */
+.accion-container {
+    display: flex;
+    gap: 8px; /* Espaciado entre los iconos */
+  }
+  
+  .accion-icon {
+    cursor: pointer;
+  }
+  

@@ -1,62 +1,10 @@
-<div class="container mt-5">
-  <h2 class="text-center">Lista de Productos</h2>
-  <div class="table-container">
-    <table mat-table [dataSource]="productosTabla" class="mat-elevation-z8">
-      <!-- Columna Nombre -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let producto">{{ producto.nombre }}</td>
-      </ng-container>
-
-      <!-- Columna Descripcion -->
-      <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-        <td mat-cell *matCellDef="let producto">{{ producto.descripcion }}</td>
-      </ng-container>
-
-      <!-- Columna Precio -->
-      <ng-container matColumnDef="precio">
-        <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let producto">{{ producto.precio }}</td>
-      </ng-container>
-
-      <!-- Columna Categoria -->
-<ng-container matColumnDef="categoria">
-  <th mat-header-cell *matHeaderCellDef>Categoria</th>
-  <td mat-cell *matCellDef="let producto">{{ producto.categoria }}</td>
-</ng-container>
-
-
-      <!-- Columna Foto -->
-      <ng-container matColumnDef="foto">
-        <th mat-header-cell *matHeaderCellDef>Foto</th>
-        <td mat-cell *matCellDef="let producto">
-          <img [src]="producto.foto" alt="Foto de la categoría: {{ producto.foto }}" height="100">
-        </td>
-      </ng-container>
-
-      <!-- Columna Acción -->
-      <ng-container matColumnDef="accion">
-        <th mat-header-cell *matHeaderCellDef>Acción</th>
-        <td mat-cell *matCellDef="let producto">
-          <mat-icon (click)="eliminarProducto(producto)">delete</mat-icon>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-</div>
-
-
-
-
-
-
+<!-- boton agregar producto -->
 <div class="text-center">
-<button *ngIf="!formularioEnviado" class="btn btn-dark mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Agregar Producto</button>
-</div>
+  <button *ngIf="!formularioEnviado" class="btn btn-dark mb-3 m-2" (click)="mostrarFormulario = !mostrarFormulario">Agregar Producto</button>
+  </div>
+  
+<!--FORMULARIO -->
+
 
 
 
@@ -115,3 +63,122 @@
     </div>
   </div>
 </div>
+
+
+
+ <!-- FORMULARIO EDICION -->
+ <div class="container mt-5 m-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 estilo-card text-center">
+      <div *ngIf="mostrarFormularioEdicion">
+        <h1>Editar producto</h1>
+        <form [formGroup]="formularioEdicion" id="formularioEdicion" (ngSubmit)="guardarEdicion()">
+          <!-- Campo Nombre -->
+          <div class="mb-3 m-3">
+            <label for="nombre" class="form-label">Nombre del Producto:</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+            <div *ngIf="formularioEdicion.controls['nombre'].invalid && formularioEdicion.controls['nombre'].touched"
+                 class="text-white">Campo requerido</div>
+          </div>
+          
+          <!-- Campo Descripcion -->
+          <div class="mb-3 m-3">
+            <label for="descripcion" class="form-label">Descripción del Producto:</label>
+            <input type="text" class="form-control" id="descripcion" formControlName="descripcion" required>
+            <div *ngIf="formularioEdicion.controls['descripcion'].invalid && formularioEdicion.controls['descripcion'].touched"
+                 class="text-white">Campo requerido</div>
+          </div>
+          
+          <!-- Campo Precio -->
+          <div class="mb-3 m-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" step="0.01" class="form-control" id="precio" formControlName="precio" required>
+            <div *ngIf="formularioEdicion.controls['precio'].invalid && formularioEdicion.controls['precio'].touched"
+                 class="text-white">Campo requerido y debe ser mayor o igual a 0</div>
+          </div>
+          
+          <!-- Campo Categoría -->
+          <div class="mb-3 m-3">
+            <label for="categoria" class="form-label">Categoría:</label>
+            <select class="form-control" id="categoria" formControlName="categoria" required>
+              <option *ngFor="let categoria of categorias | async" [value]="categoria.nombre">{{ categoria.nombre }}</option>
+            </select>
+            <div *ngIf="formularioEdicion.controls['categoria'].invalid && formularioEdicion.controls['categoria'].touched"
+                 class="text-white">Campo requerido</div>
+          </div>
+          
+          <!-- Campo Foto -->
+          <div class="mb-3">
+            <label for="foto" class="form-label">Foto del Producto:</label>
+            <input type="file" accept=".png, .jpg, .jpeg" (change)="cargarImagen($event)" class="form-control" id="foto" formControlName="foto" required>
+            <div *ngIf="formularioEdicion.controls['foto'].invalid && formularioEdicion.controls['foto'].touched"
+                 class="text-white">Campo requerido</div>
+          </div>
+          
+          <button type="submit" class="btn btn-light m-2" [disabled]="!botonGuardarHabilitado">Guardar edición</button>
+
+          <button class="btn btn-light mb-3 m-2" (click)="cancelarEdicion()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- TABLA PRODUCTOS -->
+<div class="container mt-5 m-3">
+  <h2 class="text-center">Lista de Productos</h2>
+  <div class="table-container">
+    <table mat-table [dataSource]="productosTabla" class="mat-elevation-z8">
+      <!-- Columna Nombre -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let producto">{{ producto.nombre }}</td>
+      </ng-container>
+
+      <!-- Columna Descripcion -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+        <td mat-cell *matCellDef="let producto">{{ producto.descripcion }}</td>
+      </ng-container>
+
+      <!-- Columna Precio -->
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef>Precio</th>
+        <td mat-cell *matCellDef="let producto">{{ producto.precio }}</td>
+      </ng-container>
+
+      <!-- Columna Categoria -->
+<ng-container matColumnDef="categoria">
+  <th mat-header-cell *matHeaderCellDef>Categoria</th>
+  <td mat-cell *matCellDef="let producto">{{ producto.categoria }}</td>
+</ng-container>
+
+
+      <!-- Columna Foto -->
+      <ng-container matColumnDef="foto">
+        <th mat-header-cell *matHeaderCellDef>Foto</th>
+        <td mat-cell *matCellDef="let producto">
+          <img [src]="producto.foto" alt="Foto de la categoría: {{ producto.foto }}" height="100">
+        </td>
+      </ng-container>
+
+      <!-- Columna Acción -->
+<ng-container matColumnDef="accion">
+  <th mat-header-cell *matHeaderCellDef>Acción</th>
+  <td mat-cell *matCellDef="let producto">
+    <div class="accion-container">
+      <mat-icon class="accion-icon" (click)="eliminarProducto(producto)">delete</mat-icon>
+      <mat-icon class="accion-icon" (click)="editarProducto(producto)">edit</mat-icon>
+    </div>
+  </td>
+</ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+
+
+

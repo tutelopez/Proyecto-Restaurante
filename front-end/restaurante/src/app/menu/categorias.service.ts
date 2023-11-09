@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc, docData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, updateDoc, docData, getDoc } from '@angular/fire/firestore';
 import Categorias from './categorias-interface';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
@@ -89,6 +89,25 @@ export class CategoriasService {
     return { ...data };
   }
 
+
+  async actualizarCategoriaEnFirestore(categoria: Categorias) {
+    try {
+      const categoriaDoc = doc(this.firestore, `categoria/${categoria.id}`);
+      
+      // Verificar si el documento existe antes de intentar actualizarlo
+      const docSnapshot = await getDoc(categoriaDoc);
+      if (docSnapshot.exists()) {
+        // El documento existe, entonces podemos proceder con la actualización
+        await updateDoc(categoriaDoc, this.toFirestore(categoria));
+        console.log('Categoria actualizado correctamente en Firestore.');
+      } else {
+        console.error('Error al actualizar la categoria: El documento no existe.');
+      }
+    } catch (error) {
+      console.error('Error al actualizar la categoria:', error);
+    }
+  }
+  
 
 
 }

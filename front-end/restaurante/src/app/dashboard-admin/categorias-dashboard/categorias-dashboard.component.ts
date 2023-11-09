@@ -18,7 +18,7 @@ export class CategoriasDashboardComponent implements OnInit {
 
   categoriasTabla = new MatTableDataSource<Categorias>();
   displayedColumns: string[] = ['nombre', 'foto', 'accion'];
-
+  formularioEdicion: FormGroup;
   mostrarFormulario: boolean = false;
   formulario: FormGroup;
   categorias: Observable<Categorias[]>;
@@ -31,6 +31,15 @@ export class CategoriasDashboardComponent implements OnInit {
       nombre: new FormControl('', Validators.required),
       foto: new FormControl(null, Validators.required),
     });
+
+    this.formularioEdicion = new FormGroup({
+      nombre: new FormControl('', Validators.required),
+      foto: new FormControl({ value: null, disabled: false },)
+    });
+
+
+
+
     this.categorias = new Observable<Categorias[]>();
   }
   mostrarSnackbar(mensaje: string) {
@@ -82,6 +91,11 @@ export class CategoriasDashboardComponent implements OnInit {
   }
 
   imagenes: any[] = [];
+
+  imagenCargada: boolean = true;
+  botonGuardarHabilitado: boolean = true;
+
+
   async cargarImagen(event: any) {
     let archivos = event.target.files;
     let reader = new FileReader();
@@ -99,12 +113,15 @@ export class CategoriasDashboardComponent implements OnInit {
   
       // Utilizar un try-catch para manejar errores al subir la imagen
       try {
+        this.botonGuardarHabilitado = false;
+  
         const urlImagen = await this.categoriasService.subirImagen(nombre + "_" + timestamp, reader.result);
   
         if (urlImagen !== null) {
+          this.imagenCargada = false; // Reiniciar la variable al cargar una nueva imagen
           console.log(urlImagen);
-          this.urlImagenes[key] = urlImagen; // Almacenar la URL en el objeto urlImagenes usando el identificador único como clave
-          this.lastKey = key; // Actualizar el último identificador único generado
+          this.urlImagenes[key] = urlImagen;
+          this.lastKey = key;
           this.imagenCargada = true;
         } else {
           console.log('Error al obtener la URL de la imagen desde Firebase Storage.');
@@ -112,8 +129,88 @@ export class CategoriasDashboardComponent implements OnInit {
       } catch (error) {
         console.error('Error al subir la imagen:', error);
         // Puedes mostrar un mensaje de error o realizar otras acciones según tus necesidades aquí.
+      } finally {
+        this.botonGuardarHabilitado = true; // Asegúrate de habilitar el botón después de cargar la imagen
+        this.formularioEdicion.controls['foto'].enable(); 
       }
     };
   }
-  imagenCargada: boolean = false;
+  
+
+  
+  async actualizarCategoriaEnFirestore(categoria: Categorias) {
+    try {
+      await this.categoriasService.actualizarCategoria(categoria);
+      this.mostrarSnackbar('Categoria actualizado correctamente');
+      this.obtenerCategorias();
+    } catch (error) {
+      console.error('Error al actualizar la Categoria:', error);
+    }
+  }
+
+
+  mostrarFormularioEdicion: boolean = false;
+  categoriaSeleccionadaId: string | null = null; 
+
+  editarCategoria(categoria: Categorias) {
+    console.log('ID del producto seleccionado:', categoria.id);
+    this.categoriaSeleccionadaId =categoria.id || null;
+  
+    // Obtener la URL de la imagen desde Firebase Storage
+    const urlImagen = this.urlImagenes[categoria.id!] || '';
+    console.log('URL IMAGEN DE LA CATEGORIA:', categoria.foto);
+  
+    // Verificar si se cargó una nueva imagen al editar el producto
+    this.imagenCargada = false; // Reiniciamos la variable
+    // Llenar el formulario de edición con los datos del producto seleccionado
+    this.formularioEdicion.patchValue({
+      nombre: categoria.nombre,
+     
+      foto: categoria.foto // Utilizar la URL de la imagen en lugar del identificador
+    });
+  
+    // Mostrar el formulario de edición
+    this.mostrarFormularioEdicion = true;
+    this.mostrarFormulario=false;
+  }
+ 
+  guardarEdicion() {
+    if (this.formularioEdicion.valid && this.categoriaSeleccionadaId) {
+      const fotoEditada = this.imagenCargada
+        ? this.lastKey !== null ? this.urlImagenes[this.lastKey] : null
+        : this.formularioEdicion.value.foto || null;
+  
+      console.log('Foto editada:', fotoEditada);
+  
+      const categoriaEditada: Categorias = {
+        id: this.categoriaSeleccionadaId,
+        nombre: this.formularioEdicion.value.nombre,
+       
+        foto: fotoEditada,
+        
+      };
+  
+      this.actualizarCategoriaEnFirestore(categoriaEditada);
+  
+      // Reiniciar formulario y marcarlo como no enviado
+      this.formularioEdicion.reset();
+      this.formularioEnviado = true;
+  
+      // Cerrar el formulario de edición
+      this.mostrarFormularioEdicion = false;
+      this.formularioEnviado = false;
+    }
+  }
+  
+  
+  cancelarEdicion() {
+    // Resetear el formulario de edición y marcarlo como no enviado
+    this.formularioEdicion.reset();
+    this.formularioEnviado = false; // Agrega esta línea para restablecer la variable
+    // Cerrar el formulario de edición
+    this.mostrarFormularioEdicion = false;
+  }
+  
+
+
 }
