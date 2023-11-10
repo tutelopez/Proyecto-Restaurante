@@ -31,19 +31,31 @@ export class NavigationComponent implements OnInit {
   
     mostrarCategorias: boolean = false;
     mostrarProductos: boolean = false;
-  
+    mostrarConfiguracion: boolean = false;
+
     mostrarContenidoCategorias() {
       this.mostrarCategorias = true;
       this.mostrarProductos = false;
+      this.mostrarConfiguracion = false;
     }
   
     mostrarContenidoProductos() {
       this.mostrarProductos = true;
       this.mostrarCategorias = false;
+      this.mostrarConfiguracion = false;
     }
+
+    mostrarContenidoConfiguracion() {
+      this.mostrarCategorias = false;
+      this.mostrarProductos = false;
+      this.mostrarConfiguracion = true;
+    }
+
+
     mostrarNada() {
       this.mostrarProductos =false;
       this.mostrarCategorias = false;
+      this.mostrarConfiguracion = false;
     }
   
     cantidadProductos: number = 0;

@@ -12,12 +12,12 @@
         <mat-icon>home</mat-icon> Inicio
       </a>
       <a mat-list-item (click)="mostrarContenidoProductos()">
-        <mat-icon>shopping_cart</mat-icon> Productos
+        <mat-icon>restaurant</mat-icon> Productos
       </a>
       <a mat-list-item (click)="mostrarContenidoCategorias()">
         <mat-icon>category</mat-icon> Categorías
       </a>
-      <mat-list-item>
+      <mat-list-item (click)="mostrarContenidoConfiguracion()">
         <mat-icon>settings</mat-icon> Configuración
       </mat-list-item>      
       <a mat-list-item class="logout-item" (click)="openLogoutConfirmationDialog()">
@@ -46,5 +46,6 @@
     <app-dashboard-page-admin></app-dashboard-page-admin>
     <app-categorias-dashboard *ngIf="mostrarCategorias"></app-categorias-dashboard>
     <app-productos-dashboard *ngIf="mostrarProductos"></app-productos-dashboard>
+    <app-configuracion-dashboard *ngIf="mostrarConfiguracion"></app-configuracion-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>

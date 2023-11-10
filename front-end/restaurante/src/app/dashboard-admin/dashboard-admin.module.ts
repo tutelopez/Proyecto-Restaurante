@@ -7,24 +7,31 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsMo
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfiguracionDashboardComponent } from './configuracion-dashboard/configuracion-dashboard.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     ProductosDashboardComponent,
     CategoriasDashboardComponent,
+    ConfiguracionDashboardComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule , 
+    MatIconModule ,
+    MatDividerModule,
+    MatButtonModule
   ],
   exports: [
     DashboardPageComponent,
     ProductosDashboardComponent,
-    CategoriasDashboardComponent
+    CategoriasDashboardComponent,
+    ConfiguracionDashboardComponent,
   ]
 })
 export class DashboardAdminModule { }
