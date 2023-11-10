@@ -8,14 +8,34 @@
 </div>
 
 <h2>Nombre del restaurante:</h2>
-<p>aqui va el nombre del restaurante</p>
-
+<p>{{ primerRestaurante?.nombre || 'No se encontró el nombre del restaurante' }}</p>
 
 <h2>Número de Whatsapp:</h2>
-<p>aqui va el numero de whatsapp del restaurante</p>
-
+<p>{{ primerRestaurante?.numeroTel || 'No se encontró el número de WhatsApp' }}</p>
 
 <h2>Logo:</h2>
-<p>aqui va el logo del restaurante</p>
+<img [src]="primerRestaurante?.foto || 'URL_DE_LA_IMAGEN_POR_DEFECTO'" alt="Logo del restaurante" *ngIf="primerRestaurante?.foto; else noLogo">
+<ng-template #noLogo>No se encontró el logo del restaurante</ng-template>
 
- 
+
+<form [formGroup]="formularioEdicion" (ngSubmit)="guardarCambios()">
+    <div class="form-group">
+      <label for="nombreRestaurante">Nombre del restaurante:</label>
+      <input type="text" id="nombreRestaurante" formControlName="nombre" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="numeroWhatsapp">Número de WhatsApp:</label>
+      <input type="text" id="numeroWhatsapp" formControlName="numeroTel" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="logoRestaurante">Logo:</label>
+      <input type="file" id="logoRestaurante" (change)="cargarImagen($event)" class="form-control">
+    </div>
+  
+    <div class="text-end m-3">
+      <button mat-raised-button color="warn" [disabled]="!formularioEdicion.valid">Guardar Cambios</button>
+    </div>
+  </form>
+  
