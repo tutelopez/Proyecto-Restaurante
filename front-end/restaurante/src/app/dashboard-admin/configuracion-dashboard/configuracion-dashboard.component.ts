@@ -37,7 +37,7 @@ export class ConfiguracionDashboardComponent implements OnInit {
 
   restaurantes: Restaurante[] = [];
   primerRestaurante: Restaurante | null = null;
-
+  
   formularioEdicion: FormGroup;
   imagenes: any[] = [];
   urlImagenes: { [key: string]: string } = {};

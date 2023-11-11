@@ -9,6 +9,14 @@
   color: #fff;
   position: relative; /* Agrega esta propiedad */
 }
+.fancy {
+  border-radius: 51% 49% 61% 39% / 72% 35% 65% 28%;
+  width: 400px;
+  height: 400px;
+  background: #ea4225; /* Nuevo color de fondo */
+  background: -webkit-linear-gradient(to right, #9c9a19, #ea4225); /* Gradiente con el nuevo color */
+  background: linear-gradient(to right, #9c9a19, #ea4225); /* Gradiente con el nuevo color */
+}
 
 .masthead::before {
   content: "";
@@ -36,7 +44,7 @@
   }
   header p{
     font-size: 30px;
-   
+    
   }
 /* Estilos personalizados para el botón */
 .btn-personalizado {
@@ -69,10 +77,12 @@
 @media (max-width: 768px) {
   header h1 {
     font-size: 30px; /* Ajusta el tamaño de la fuente para dispositivos móviles */
+    font-weight: bold;
     line-height: 1.2; /* Aumenta el espacio entre líneas para mayor legibilidad */
   }
   
   header p {
     font-size: 18px; /* Ajusta el tamaño de la fuente para dispositivos móviles */
+    font-weight: bold;
   }
 }
