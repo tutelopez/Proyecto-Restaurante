@@ -4,11 +4,11 @@
     bottom: 20px; /* Puedes ajustar la posición vertical según tu preferencia */
     right: 20px; /* Puedes ajustar la posición horizontal según tu preferencia */
     z-index: 9999; /* Asegura que el badge esté por encima de otros elementos */
-    background-color: #000; /* Fondo negro */
-    border: 4px solid #ea4225; /* Contorno #ea4225 */
+    background-color: #ffffff; /* Fondo negro */
     border-radius: 50%; /* Borde redondeado para hacer un círculo */
     padding: 10px; /* Espacio interno para dar margen al contenido */
     color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.589);
     transition: transform 0.2s ease;
   }
   
@@ -18,4 +18,7 @@
 }
 :host:active {
   transform: scale(0.8); /* Aplica un escalamiento del 80% al hacer clic */
+}
+.custom-icon {
+  color:black; /* Cambia el color del icono a rojo, puedes usar cualquier color que desees */
 }

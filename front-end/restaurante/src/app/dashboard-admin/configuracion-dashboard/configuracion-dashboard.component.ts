@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConfiguracionService } from './configuracion.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Restaurante from './interface/configuracion-interface';
+import { ColorPickerService } from './service/color-picker.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-configuracion-dashboard',
@@ -9,7 +12,7 @@ import Restaurante from './interface/configuracion-interface';
   styleUrls: ['./configuracion-dashboard.component.css']
 })
 export class ConfiguracionDashboardComponent implements OnInit {
-  constructor(private configuracionService: ConfiguracionService) {
+  constructor(private cdr: ChangeDetectorRef, private configuracionService: ConfiguracionService, private colorPickerService: ColorPickerService) {
     this.restaurante = null;
     this.formularioEdicion = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -29,7 +32,7 @@ export class ConfiguracionDashboardComponent implements OnInit {
 
    
   
-  console.log('oninit Primer restaurante de la colección:', this.primerRestaurante);
+ 
   }
 
   restaurantes: Restaurante[] = [];
@@ -84,17 +87,21 @@ export class ConfiguracionDashboardComponent implements OnInit {
 
   restaurante: Restaurante | null;
 
-  
   guardarCambios() {
     if (this.formularioEdicion.valid) {
       const nombre = this.formularioEdicion.get('nombre')?.value || '';
       const numeroTel = this.formularioEdicion.get('numeroTel')?.value || '';
   
+      const fotoExistente = this.formularioEdicion.get('foto')?.value || null;
+  
+      const fotoEditada = this.imagenCargada ?
+        (this.lastKey !== null ? this.urlImagenes[this.lastKey] : null) :
+        (fotoExistente || null); // Usa la foto existente si no se carga una nueva
+  
+      this.enviandoFormulario = true;
+      this.cdr.detectChanges(); // Forzar la actualización de la vista
+  
       if (this.restaurante) {
-        const fotoEditada = this.imagenCargada ? 
-          (this.lastKey !== null ? this.urlImagenes[this.lastKey] : null) : 
-          (this.restaurante.foto || null); // Mantener la foto existente si no se carga una nueva
-        
         const restauranteActualizado: Restaurante = {
           id: this.restaurante.id,
           nombre: this.formularioEdicion.value.nombre,
@@ -104,7 +111,13 @@ export class ConfiguracionDashboardComponent implements OnInit {
   
         console.log('Restaurante Actualizado:', restauranteActualizado);
   
-        this.configuracionService.verificarYActualizarRestaurante(restauranteActualizado);
+        setTimeout(() => {
+          this.enviandoFormulario = false;
+          this.cdr.detectChanges(); // Forzar la actualización de la vista
+          this.configuracionService.verificarYActualizarRestaurante(restauranteActualizado);
+          this.formularioEdicion.reset();
+          this.obtenerPrimerRestauranteDeLaColeccion();
+        }, 3000);
       } else {
         // No se encontró un restaurante, así que crea uno nuevo
         const nuevoRestaurante: Restaurante = {
@@ -115,12 +128,20 @@ export class ConfiguracionDashboardComponent implements OnInit {
   
         console.log('Nuevo Restaurante:', nuevoRestaurante);
   
-        this.configuracionService.verificarYActualizarRestaurante(nuevoRestaurante);
+        setTimeout(() => {
+          this.enviandoFormulario = false;
+          this.cdr.detectChanges(); // Forzar la actualización de la vista
+          this.configuracionService.verificarYActualizarRestaurante(nuevoRestaurante);
+          this.formularioEdicion.reset();
+          this.obtenerPrimerRestauranteDeLaColeccion();
+        }, 3000);
       }
-      this.formularioEdicion.reset();
-      this.obtenerPrimerRestauranteDeLaColeccion();
     }
   }
+  
+
+  enviandoFormulario: boolean = false;
+
   
   obtenerPrimerRestauranteDeLaColeccion() {
     this.configuracionService.obtenerColeccionRestaurantes().subscribe((restaurantes) => {
@@ -136,5 +157,10 @@ export class ConfiguracionDashboardComponent implements OnInit {
       }
     });
   }
+
+ 
+
+
+
 }
 

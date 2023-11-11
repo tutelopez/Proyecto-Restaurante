@@ -2,23 +2,31 @@
     <H1>  <mat-icon>settings</mat-icon> Configuración del restaurante</H1>
 </div>
 
-
-<div class="text-end m-3">
-    <button mat-raised-button color="warn"> <mat-icon>edit</mat-icon> Editar datos</button>
+<div class="card m-5">
+  <div class="card-header">
+    Datos del restaurante:
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">Nombre:</h2>
+    <p class="card-text">{{ primerRestaurante?.nombre || 'No se encontró el nombre del restaurante' }}</p>
+    <h2 class="card-title">Número de Whatsapp:</h2>
+    <p class="card-text">{{ primerRestaurante?.numeroTel || 'No se encontró el número de WhatsApp' }}</p>
+    <h2 class="card-title">Logo:</h2>
+    <div class="text-center">
+      <img [src]="primerRestaurante?.foto || 'URL_DE_LA_IMAGEN_POR_DEFECTO'" alt="Logo del restaurante" *ngIf="primerRestaurante?.foto; else noLogo" style="max-width: 40%; max-height: auto; border-radius: 15px;">
+      <ng-template #noLogo>No se encontró el logo del restaurante</ng-template>
+    </div>
+  </div>
 </div>
 
-<h2>Nombre del restaurante:</h2>
-<p>{{ primerRestaurante?.nombre || 'No se encontró el nombre del restaurante' }}</p>
 
-<h2>Número de Whatsapp:</h2>
-<p>{{ primerRestaurante?.numeroTel || 'No se encontró el número de WhatsApp' }}</p>
+<br>
 
-<h2>Logo:</h2>
-<img [src]="primerRestaurante?.foto || 'URL_DE_LA_IMAGEN_POR_DEFECTO'" alt="Logo del restaurante" *ngIf="primerRestaurante?.foto; else noLogo">
-<ng-template #noLogo>No se encontró el logo del restaurante</ng-template>
-
-
-<form [formGroup]="formularioEdicion" (ngSubmit)="guardarCambios()">
+<div class="text-center">
+  <H2>  <mat-icon>edit</mat-icon> Editar datos del restaurante</H2>
+</div>
+<div class="card text-center m-5">
+  <form class="m-2" [formGroup]="formularioEdicion" (ngSubmit)="guardarCambios()">
     <div class="form-group">
       <label for="nombreRestaurante">Nombre del restaurante:</label>
       <input type="text" id="nombreRestaurante" formControlName="nombre" class="form-control">
@@ -27,15 +35,28 @@
     <div class="form-group">
       <label for="numeroWhatsapp">Número de WhatsApp:</label>
       <input type="text" id="numeroWhatsapp" formControlName="numeroTel" class="form-control">
+      <p style="color: rgb(255, 153, 0);">Escribe tu codigo de pais Ej: 54 (si eres de Argentina) + tu numero de telefono</p>
+      <p style="color: rgb(255, 153, 0);">EJEMPLO: 5412345678</p>
+
     </div>
   
     <div class="form-group">
       <label for="logoRestaurante">Logo:</label>
       <input type="file" id="logoRestaurante" (change)="cargarImagen($event)" class="form-control">
     </div>
-  
+    <p style="color: red;">Antes de guardar tus datos, asegurate siempre de cargar la imagen del logo de tu restaurante</p>
     <div class="text-end m-3">
       <button mat-raised-button color="warn" [disabled]="!formularioEdicion.valid">Guardar Cambios</button>
+      <div class="text-center">
+        <mat-progress-spinner
+        *ngIf="enviandoFormulario"
+        mode="indeterminate"  
+        [diameter]="30" 
+        color="danger" 
+      ></mat-progress-spinner>
+      </div>
+     
     </div>
   </form>
   
+</div>

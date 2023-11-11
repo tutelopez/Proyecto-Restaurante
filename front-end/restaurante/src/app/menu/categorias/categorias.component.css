@@ -6,6 +6,13 @@
   @media (max-width: 768px) {
     width: 80%; /* Cambia el ancho de la card para dispositivos móviles */
   }
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+}
+/* Aplica estilos cuando el cursor está sobre la tarjeta */
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Cambia la sombra al pasar el cursor */
+  transform: translateY(-5px); /* Realiza una ligera elevación */
 }
 
 .card-img {

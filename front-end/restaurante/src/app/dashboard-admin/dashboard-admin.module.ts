@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfiguracionDashboardComponent } from './configuracion-dashboard/configuracion-dashboard.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatPaginatorModule,
     MatIconModule ,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     DashboardPageComponent,

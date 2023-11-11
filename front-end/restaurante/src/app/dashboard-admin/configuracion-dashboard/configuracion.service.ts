@@ -54,7 +54,7 @@ export class ConfiguracionService {
 
   async actualizarDatosEnFirestore(restaurante: Restaurante) {
     try {
-      const restauranteDoc = doc(this.firestore, `restaurante/${restaurante.id}`);
+      const restauranteDoc = doc(this.firestore, `restaurantes/${restaurante.id}`);
       
       // Verificar si el documento existe antes de intentar actualizarlo
       const docSnapshot = await getDoc(restauranteDoc);

@@ -4,6 +4,8 @@ import Productos from '../../menu/productos-interface';
 import { CarritoComunicacionService } from '../../menu/menu-page/carrito-comunicacion.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfiguracionService } from 'src/app/dashboard-admin/configuracion-dashboard/configuracion.service';
+import Restaurante from 'src/app/dashboard-admin/configuracion-dashboard/interface/configuracion-interface';
 
 @Component({
   selector: 'app-carrito-dialog',
@@ -20,7 +22,8 @@ export class CarritoDialogComponent implements OnInit {
   notaEspecial: string = '';
  
 
-  constructor(private carritoService: CarritoService, 
+  constructor(private carritoService: CarritoService,
+    private configuracionService: ConfiguracionService, 
     private carritoComunicacionService: CarritoComunicacionService,
     private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar) {}
@@ -28,6 +31,7 @@ export class CarritoDialogComponent implements OnInit {
   ngOnInit() {
     this.productosCarrito = this.carritoService.obtenerCarrito();
     this.precioTotal = this.carritoService.calcularPrecioTotal();
+    this.obtenerPrimerRestauranteDeLaColeccion();
   }
 
   
@@ -68,11 +72,16 @@ export class CarritoDialogComponent implements OnInit {
 
   getWhatsappLink(): string {
     const mensaje = this.generarMensajePedido();
-    const telefono = 'XXXXXXXXXXXX'; // Reemplaza con el número de teléfono al que deseas enviar el pedido
-
+    let telefono = 'XXXXXXXXXXXX'; // Número de teléfono por defecto
+  
+    if (this.primerRestaurante && this.primerRestaurante.numeroTel) {
+      telefono = this.primerRestaurante.numeroTel.toString();
+    }
+  
     const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensaje)}`;
     return url;
   }
+  
 
   
   enviarPedido(): void {
@@ -100,4 +109,15 @@ export class CarritoDialogComponent implements OnInit {
     }, 1000); // Revisar cada segundo si la ventana se ha abierto
   }
   
+
+  primerRestaurante: Restaurante | null = null;
+  obtenerPrimerRestauranteDeLaColeccion() {
+    this.configuracionService.obtenerColeccionRestaurantes().subscribe((restaurantes) => {
+      if (restaurantes.length > 0) {
+        this.primerRestaurante = restaurantes[0];
+       
+        console.log('FUNCION RESTAURANTE COLLECT Primer restaurante de la colección:', this.primerRestaurante);
+      }
+    });
+}
 }

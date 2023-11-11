@@ -48,10 +48,10 @@ p {
 }
 
 .navbar-toggler {
-  border: none; /* Quítale el borde */
-  outline: none; /* Quita el contorno predeterminado al hacer clic */
+  border: none; 
+  outline: none; 
 }
 .navbar-toggler:focus {
-  outline: none; /* Quita el contorno cuando el botón está enfocado */
+  outline: none; 
   border: none;
 }
