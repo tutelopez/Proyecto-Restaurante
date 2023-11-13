@@ -8,6 +8,11 @@ import { UserServiceService } from '../auth/user.service.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog/logout-confirmation-dialog.component';
+import Restaurante from 'src/app/dashboard-admin/configuracion-dashboard/interface/configuracion-interface';
+import { ConfiguracionService } from 'src/app/dashboard-admin/configuracion-dashboard/configuracion.service';
+
+
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -25,7 +30,8 @@ export class NavigationComponent implements OnInit {
       private categoriasService: CategoriasService,
       private userService: UserServiceService,
       private router: Router,
-      private dialog: MatDialog
+      private dialog: MatDialog,
+      private configuracionService: ConfiguracionService
       
       ) { }
   
@@ -65,10 +71,21 @@ export class NavigationComponent implements OnInit {
       // Llamar a la función para obtener el contador de productos al inicializar el componente
       this.obtenerCantidadProductos();
       this.obtenerCantidadCategorias();
+      this.obtenerPrimerRestauranteDeLaColeccion();
       
     }
     
-  
+    primerRestaurante: Restaurante | null = null;
+  obtenerPrimerRestauranteDeLaColeccion() {
+    this.configuracionService.obtenerColeccionRestaurantes().subscribe((restaurantes) => {
+      if (restaurantes.length > 0) {
+        this.primerRestaurante = restaurantes[0];
+        
+        console.log('FUNCION RESTAURANTE COLLECT Primer restaurante de la colección:', this.primerRestaurante);
+      }
+    });
+  }
+
     obtenerCantidadProductos() {
       this.productosService.obtenerProductos().subscribe((productos) => {
         this.cantidadProductos = productos.length;

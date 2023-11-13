@@ -4,7 +4,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <div class="sidenav-header">
-      <img src="../../assets//imagenes//logo.jpg" alt="Logo"> <!-- LOGO DEL RESTAURANTE -->
+      <img [src]="primerRestaurante?.foto || ' '">    <a class="navbar-brand" routerLink="/dashboard-admin"></a>
       <mat-toolbar>Menu</mat-toolbar>
     </div>
     <mat-nav-list>
