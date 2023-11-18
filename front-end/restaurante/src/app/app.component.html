@@ -1,1 +1,16 @@
-<router-outlet></router-outlet> 
+
+<ng-container *ngIf="cargando; else contenidoApp">
+    <!-- Mostrar spinner mientras se carga -->
+    <div class="spinner-container  {{ fadeOutClass }}">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-template #contenidoApp>
+    <router-outlet></router-outlet> 
+  </ng-template>
+  
+
+

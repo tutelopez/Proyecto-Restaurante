@@ -38,23 +38,28 @@ export class NavigationComponent implements OnInit {
     mostrarCategorias: boolean = false;
     mostrarProductos: boolean = false;
     mostrarConfiguracion: boolean = false;
+    mostrarInicio: boolean = true;
+
 
     mostrarContenidoCategorias() {
       this.mostrarCategorias = true;
       this.mostrarProductos = false;
       this.mostrarConfiguracion = false;
+      this.mostrarInicio = false;  
     }
   
     mostrarContenidoProductos() {
       this.mostrarProductos = true;
       this.mostrarCategorias = false;
       this.mostrarConfiguracion = false;
+      this.mostrarInicio = false;  
     }
 
     mostrarContenidoConfiguracion() {
       this.mostrarCategorias = false;
       this.mostrarProductos = false;
       this.mostrarConfiguracion = true;
+      this.mostrarInicio = false;  
     }
 
 
@@ -62,6 +67,7 @@ export class NavigationComponent implements OnInit {
       this.mostrarProductos =false;
       this.mostrarCategorias = false;
       this.mostrarConfiguracion = false;
+      this.mostrarInicio = true;  
     }
   
     cantidadProductos: number = 0;

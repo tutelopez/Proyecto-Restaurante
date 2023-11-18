@@ -51,14 +51,24 @@ export class MenuPageComponent implements OnInit {
   }
   
   agregarAlCarrito(producto: Productos) {
-    this.carritoService.agregarProducto(producto);
-    this.carritoComunicacionService.actualizarContador();
-    this.mostrarSnackbar();
-   
+    if (this.carritoService.obtenerCantidadTotal() < 10) {
+      this.carritoService.agregarProducto(producto);
+      this.carritoComunicacionService.actualizarContador();
+      this.mostrarSnackbar();
+    } else {
+      this.productosPermitidos();
+    }
   }
-
   mostrarSnackbar() {
     this.snackBar.open('Agregado al pedido', '', {
+      duration: 3000, // Duración en milisegundos que el Snackbar estará visible
+      horizontalPosition: 'center', // Posición horizontal (start, center, end)
+      verticalPosition: 'bottom', // Posición vertical (top, bottom)
+      panelClass: ['no-close-button']
+    });
+  }
+  productosPermitidos() {
+    this.snackBar.open('Solo se pueden agregar hasta 10 productos al pedido', '', {
       duration: 3000, // Duración en milisegundos que el Snackbar estará visible
       horizontalPosition: 'center', // Posición horizontal (start, center, end)
       verticalPosition: 'bottom', // Posición vertical (top, bottom)

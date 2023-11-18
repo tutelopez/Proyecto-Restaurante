@@ -15,8 +15,8 @@ export class ConfiguracionDashboardComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef, private configuracionService: ConfiguracionService, private colorPickerService: ColorPickerService) {
     this.restaurante = null;
     this.formularioEdicion = new FormGroup({
-      nombre: new FormControl('', Validators.required),
-      numeroTel: new FormControl('', Validators.required),
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
+      numeroTel: new FormControl('', [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(16)]),
       foto: new FormControl(null), // Inicializar con null
     });
   
@@ -94,9 +94,10 @@ export class ConfiguracionDashboardComponent implements OnInit {
   
       const fotoExistente = this.formularioEdicion.get('foto')?.value || null;
   
-      const fotoEditada = this.imagenCargada ?
-        (this.lastKey !== null ? this.urlImagenes[this.lastKey] : null) :
-        (fotoExistente || null); // Usa la foto existente si no se carga una nueva
+      // Verifica si se ha cargado una nueva imagen o no
+      const fotoEditada = this.imagenCargada
+        ? (this.lastKey !== null ? this.urlImagenes[this.lastKey] : null)
+        : (fotoExistente || null); // Usa la foto existente si no se carga una nueva
   
       this.enviandoFormulario = true;
       this.cdr.detectChanges(); // Forzar la actualización de la vista
@@ -123,7 +124,7 @@ export class ConfiguracionDashboardComponent implements OnInit {
         const nuevoRestaurante: Restaurante = {
           nombre,
           numeroTel,
-          foto: this.lastKey !== null ? this.urlImagenes[this.lastKey] : null,
+          foto: fotoEditada !== null ? fotoEditada : this.primerRestaurante?.foto || null,
         };
   
         console.log('Nuevo Restaurante:', nuevoRestaurante);
@@ -138,6 +139,7 @@ export class ConfiguracionDashboardComponent implements OnInit {
       }
     }
   }
+  
   
 
   enviandoFormulario: boolean = false;

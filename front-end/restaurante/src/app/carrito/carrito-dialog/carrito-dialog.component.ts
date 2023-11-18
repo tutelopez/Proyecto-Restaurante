@@ -83,10 +83,10 @@ export class CarritoDialogComponent implements OnInit {
   }
   
 
-  
+
   enviarPedido(): void {
     // Verificar si los campos requeridos están completos
-    if (!this.nombreRecibe || !this.numeroTelefono || !this.direccion) {
+    if (!this.nombreRecibe || !this.numeroTelefono) {
       alert('Por favor, completa todos los campos requeridos antes de enviar el pedido.');
       return;
     }

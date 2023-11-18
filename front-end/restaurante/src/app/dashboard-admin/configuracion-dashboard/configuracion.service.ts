@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/storage';
 import { environment } from 'src/environments/environment';
-
+import { BehaviorSubject } from 'rxjs';
 firebase.initializeApp(environment.firebase);
 
 
@@ -109,6 +109,14 @@ export class ConfiguracionService {
   obtenerColeccionRestaurantes(): Observable<Restaurante[]> {
     const restauranteCollectionRef = collection(this.firestore, 'restaurantes');
     return collectionData(restauranteCollectionRef) as Observable<Restaurante[]>;
+  }
+
+
+  private nombreRestauranteSource = new BehaviorSubject<string>(''); // Inicializalo con un valor por defecto si es apropiado
+  nombreRestaurante$ = this.nombreRestauranteSource.asObservable();
+
+  actualizarNombreRestaurante(nombre: string) {
+    this.nombreRestauranteSource.next(nombre);
   }
 
 }

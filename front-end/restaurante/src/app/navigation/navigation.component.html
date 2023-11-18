@@ -43,7 +43,7 @@
       <span>Bienvenido/a al panel de administración</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <app-dashboard-page-admin></app-dashboard-page-admin>
+    <app-dashboard-page-admin *ngIf="mostrarInicio"></app-dashboard-page-admin>
     <app-categorias-dashboard *ngIf="mostrarCategorias"></app-categorias-dashboard>
     <app-productos-dashboard *ngIf="mostrarProductos"></app-productos-dashboard>
     <app-configuracion-dashboard *ngIf="mostrarConfiguracion"></app-configuracion-dashboard>
